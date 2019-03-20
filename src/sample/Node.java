@@ -9,7 +9,7 @@ public class Node {
         edges = new LinkedList<>();
     }
 
-    void addEdge(Edge edge) {
+    public void addEdge(Edge edge) {
         edges.add(edge);
     }
 }
