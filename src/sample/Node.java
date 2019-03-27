@@ -6,15 +6,15 @@ import java.util.List;
 public class Node {
     private LinkedList<Edge> edges;
     private String name;
+    private int x, y;
 
-    public Node(String name) {
+    public Node(String name, int x, int y) {
         this.name = name;
+        this.x = x;
+        this.y = y;
         edges = new LinkedList<>();
     }
 
-    public void addEdge(Edge edge) {
-        edges.add(edge);
-    }
 
     public List<Node> getNeighbors() {
         LinkedList<Node> neighbors = new LinkedList<Node>();
@@ -26,5 +26,17 @@ public class Node {
 
     public String getName() {
         return name;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public LinkedList<Edge> getEdges() {
+        return edges;
     }
 }
