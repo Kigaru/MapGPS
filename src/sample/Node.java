@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Node {
-    LinkedList<Edge> edges;
+    private LinkedList<Edge> edges;
 
     public Node() {
         edges = new LinkedList<>();

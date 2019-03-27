@@ -1,9 +1,14 @@
 package sample;
 
 public class Edge {
-    Node origin; //these names help if a route is unidirectional
-    Node destination; //TODO junit test whether edges connect to node
-    float weight;
+    private Node origin; //these names help if a route is unidirectional
+    private Node destination; //TODO junit test whether edges connect to node
+    private float weight;
+
+    public Edge(Node origin, Node destination){
+        this.origin = origin;
+        this.destination = destination;
+    }
 
     public Node getOrigin() {
         return origin;
@@ -13,7 +18,7 @@ public class Edge {
         return destination;
     }
 
-    public float weight() {
+    public float getWeight() {
         return weight;
     }
 }
