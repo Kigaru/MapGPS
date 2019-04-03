@@ -1,12 +1,24 @@
 package sample;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Graph {
     private LinkedList<Node> nodes;
 
+    public Graph() {
+    nodes = new LinkedList<>();
+}
+
+    public void addNode(Node n) {
+        nodes.add(n);
+    }
+
     public LinkedList<Node> dijkstra(Node origin, Node destination) {
         //step 0: set all node destination cost to infinite
+        HashMap<Node,Integer> destinationCostMap = new HashMap();
+        for(Node n: nodes) destinationCostMap.put(n,Integer.MAX_VALUE);
+        //destinationCostMap.destinationCostMap.get(origin)
         //step 0.1: create a previous node table.
         //step 0.2: create settled and unsettled sets
         //              they will provide a list of nodes that have been already iterated.
