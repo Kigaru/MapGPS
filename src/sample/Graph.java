@@ -45,14 +45,13 @@ public class Graph {
                     currentNode = n;
                 }
             }
-            //step 2: iterate through each edge that is not settled on that iterated node, add these nodes to unsettled.
             for(Node n: currentNode.getNeighbors()) {
-
+                //step 2: iterate through each edge that is not settled on that iterated node, add these nodes to unsettled.
+                //step 3: add total destination cost to each of these neighbors (referring back to step 0)
+                //step 4: add the iterated node to each neighbor's previous node table.
+                //step 5: add the iterated node to settled
+                //step 6: step 1 - 5 until all nodes are settled
             }
-            //step 3: add total destination cost to each of these neighbors (referring back to step 0)
-            //step 4: add the iterated node to each neighbor's previous node table.
-            //step 5: add the iterated node to settled
-            //step 6: step 1 - 5 until all nodes are settled
         }
         //step 7: create a list of nodes to get the order of nodes to travel through.
         //step 7.1: add the destination node to the list
