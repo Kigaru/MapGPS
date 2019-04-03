@@ -39,4 +39,9 @@ public class Node {
     public LinkedList<Edge> getEdges() {
         return edges;
     }
+
+    @Override
+    public String toString() {
+        return "Node: " + name;
+    }
 }
