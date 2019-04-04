@@ -30,15 +30,15 @@ public class Graph {
         //step 0: set all node destination cost to infinite except for origin
         for(Node n: nodes) destinationCostMap.put(n,Float.MAX_VALUE);
         destinationCostMap.replace(origin, 0f);
-        //step 0.1: create a previous node table, with the origin pointing to itself, to verify (at the end) your initial origin faster.
+        //step 0.1: create a edge taken table.
         for(Node n: nodes) edgeTakenMap.put(n,null);
-        //step 0.2: create settled and unsettled sets
+        //step 0.2: create traversed and toBeTraversed sets
         //              they will provide a list of nodes that have been already iterated.
         toBeTraversed.add(origin);
         while(!toBeTraversed.isEmpty()) {
-            //step 1: choose an unsettled node with least amount of destination cost
             float lowestDestinationCost = Integer.MAX_VALUE;
             Node currentNode = toBeTraversed.iterator().next(); //needs to be initialized here, if for some reason the if statement fails
+            //step 1: choose an unsettled node with least amount of destination cost
             for (Node n: toBeTraversed) {
                 if (destinationCostMap.get(n) < lowestDestinationCost) {
                     lowestDestinationCost = destinationCostMap.get(n);
@@ -46,15 +46,18 @@ public class Graph {
                 }
             }
             for(Edge e: currentNode.getEdges()) {
-                if(!traversed.contains(e.getDestination())){
+                Node dest = e.getTheOtherNode(currentNode);//this is the node that is connected to the current node with the edge e
+                if(!traversed.contains(dest)){
                     float currentCost = destinationCostMap.get(currentNode) + e.getWeight();
                     //step 2: iterate through each edge that is not settled on that iterated node, add these nodes to unsettled.
-                    toBeTraversed.add(e.getDestination());
-                    //step 3: add total destination cost to each of these neighbors (referring back to step 0)
-                    if(currentCost < destinationCostMap.get(e.getDestination())) {
-                        destinationCostMap.replace(e.getDestination(),currentCost);
-                        //step 4: add the iterated node to each neighbor's previous node table.
-                        edgeTakenMap.replace(e.getDestination(),e);
+                    toBeTraversed.add(dest);
+                    //if the current route cost is cheaper than the one already in the table
+                    //do steps 3 & 4
+                    if(currentCost < destinationCostMap.get(dest)) {
+                        //step 3: add total destination cost to each of these neighbors
+                        destinationCostMap.replace(dest,currentCost);
+                        //step 4: add the iterated node to each neighbor's edge taken table.
+                        edgeTakenMap.replace(dest,e);
                     }
                 }
             }
@@ -63,20 +66,20 @@ public class Graph {
             traversed.add(currentNode);
             //step 6: step 1 - 5 until all nodes are settled
         }
-        //step 7: create a list of nodes to get the order of nodes to travel through.
+        //step 7: create a list of edges to get the order of edges to travel through.
         LinkedList<Edge> dijkstraPath = new LinkedList<>();
-        //step 7.1: add the destination node to the list
-        dijkstraPath.add(edgeTakenMap.get(destination));
-        //step 8: check the node that's last in the list to check it's previous node and add it to the list
-        while(dijkstraPath.getLast().getOrigin() != origin) dijkstraPath.add(edgeTakenMap.get(dijkstraPath.getLast().getOrigin()));
+        //create a current destination node
+        Node dest = destination;
+        while(!dest.equals(origin)) {
+            //step 8: add the edge that's taken from the current destination node to the route list.
+
+            dijkstraPath.add(edgeTakenMap.get(dest));
+            dest = dijkstraPath.getLast().getTheOtherNode(dest);
+        }
         //step 9: step 8 until reached the origin
         //step 10: return the list.
-
-        LinkedList<Edge> flippedPath = new LinkedList<>();//TODO i thought there was a method to flip the list no? xd
-        for(Edge e : dijkstraPath) {
-            flippedPath.addFirst(e);
-        }
-        return flippedPath;
+        Collections.reverse(dijkstraPath);
+        return dijkstraPath;
     }
 
 }
