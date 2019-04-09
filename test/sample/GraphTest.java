@@ -3,7 +3,7 @@ package sample;
 //import kotlin.collections.EmptyList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import scala.collection.immutable.List;
+//import scala.collection.immutable.List;
 
 import java.util.LinkedList;
 
