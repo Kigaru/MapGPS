@@ -1,11 +1,14 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -15,17 +18,20 @@ import java.util.LinkedList;
 public class Controller {
 
     @FXML
-    ChoiceBox<Node> fromChoice, toChoice;
+    private ChoiceBox<Node> fromChoice, toChoice;
 
     @FXML
-    Canvas canvas;
+    private Canvas canvas;
 
-    File imageFile;
-    Graph graph;
-    Image image;
+    private File imageFile;
+    private Graph graph;
+    private Image image;
+    private WritableImage routedImage;
 
 
-    public void loadImage() {
+
+    @FXML
+    private void loadImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose an image...");
         imageFile = fileChooser.showOpenDialog(canvas.getScene().getWindow());
@@ -64,7 +70,7 @@ public class Controller {
             graph.addEdge(new Edge(townG, townH, 14));
 
 
-            for (Node n : graph.getNodes()) { //TODO display of nodes to not contain a "Node: " in choice boxes
+            for (Node n : graph.getNodes()) {
                 fromChoice.getItems().add(n);
                 toChoice.getItems().add(n);
             }
@@ -72,36 +78,49 @@ public class Controller {
 
 
             gc.setFill(Color.BLACK);
-            for (Node n : graph.getNodes()) drawNode(gc, n);
+            for (Node n : graph.getNodes()) drawNode(gc, n, 5);
             for (Edge e : graph.getEdges()) drawEdge(gc, e);
 
-//            graphics.dispose(); //IMPORTANT TO PREVENT MEMORY LEAKS
-//            image = SwingFXUtils.toFXImage(awtImage, null);
-//            imageView.setImage(image);
-
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            routedImage = canvas.snapshot(params, null);
         }
     }
 
     /**
      * Draws a circle of radius 5 around a node.
-     * @param imageGraphics The graphics instance (awt) of the image
+     * @param imageGraphics The graphics context instance of the image
      * @param node The node to draw a circle around
      */
-    private void drawNode(GraphicsContext imageGraphics,Node node) {
-            imageGraphics.strokeOval(node.getX(),node.getY(),10,10);
+    private void drawNode(GraphicsContext imageGraphics,Node node, int radius) {
+            imageGraphics.strokeArc(node.getX() - radius, node.getY() - radius, radius * 2, radius * 2,0, 360, ArcType.OPEN);
     }
     private void drawEdge(GraphicsContext imageGraphics,Edge edge) {
             imageGraphics.strokeLine(edge.getOrigin().getX(),edge.getOrigin().getY(),edge.getDestination().getX(),edge.getDestination().getY());
     }
 
-    public void findPath() {
+    @FXML
+    private void drawPath() {
         if(fromChoice.getValue() != null && toChoice.getValue() != null) {
-            LinkedList<Edge> path = graph.dijkstra(fromChoice.getValue(), toChoice.getValue());//TODO reset path at start
             GraphicsContext gc = canvas.getGraphicsContext2D();
+            gc.drawImage(routedImage,0,0);
+            LinkedList<Edge> path = graph.dijkstra(fromChoice.getValue(), toChoice.getValue());
             gc.setStroke(Color.RED);
+            double orgStrokeWidth = gc.getLineWidth();
+            gc.setLineWidth(orgStrokeWidth*3);
+
+
+            gc.beginPath();
+            Node origin = fromChoice.getValue();
+            gc.moveTo(origin.getX(),origin.getY());
             for(Edge e: path) {
-                gc.strokeLine(e.getOrigin().getX(),e.getOrigin().getY(),e.getDestination().getX(),e.getDestination().getY());
+                origin = e.getTheOtherNode(origin);
+                gc.lineTo(origin.getX(),origin.getY());
             }
+            gc.stroke();
+            gc.closePath();
+
+            gc.setLineWidth(orgStrokeWidth);
         }
     }
 
