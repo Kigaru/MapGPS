@@ -1,39 +1,96 @@
 package sample;
 
-import java.util.HashMap;
-import java.util.LinkedList;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.*;
 
 public class Graph {
     private LinkedList<Node> nodes;
+    private HashSet<Edge> edges;
 
     public Graph() {
     nodes = new LinkedList<>();
-}
-
-    public void addNode(Node n) {
-        nodes.add(n);
+    edges = new HashSet<>();
     }
 
-    public LinkedList<Node> dijkstra(Node origin, Node destination) {
-        //step 0: set all node destination cost to infinite
-        HashMap<Node,Integer> destinationCostMap = new HashMap();
-        for(Node n: nodes) destinationCostMap.put(n,Integer.MAX_VALUE);
-        //destinationCostMap.destinationCostMap.get(origin)
-        //step 0.1: create a previous node table.
-        //step 0.2: create settled and unsettled sets
+//    public void addNode(Node n) {
+//        nodes.add(n);
+//    }
+
+    public void addNode(Node... n){
+        for (Node node: n) nodes.add(node);
+    }
+
+    public void addEdge(Edge... e){
+        for(Edge edge : e) edges.add(edge);
+    }
+
+    public LinkedList<Edge> dijkstra(Node origin, Node destination) {
+        HashMap<Node,Float> destinationCostMap = new HashMap();
+        HashMap<Node,Edge> edgeTakenMap = new HashMap<>();
+        HashSet<Node> traversed = new HashSet<>();
+        HashSet<Node> toBeTraversed = new HashSet<>();
+
+        //step 0: set all node destination cost to infinite except for origin
+        for(Node n: nodes) destinationCostMap.put(n,Float.MAX_VALUE);
+        destinationCostMap.replace(origin, 0f);
+        //step 0.1: create a edge taken table.
+        for(Node n: nodes) edgeTakenMap.put(n,null);
+        //step 0.2: create traversed and toBeTraversed sets
         //              they will provide a list of nodes that have been already iterated.
-        //step 1: choose an unsettled node with least amount of destination cost
-        //step 2: iterate through each edge that is not settled on that iterated node, add these nodes to unsettled.
-        //step 3: add total destination cost to each of these neighbors (referring back to step 0)
-        //step 4: add the iterated node to each neighbor's previous node table.
-        //step 5: add the iterated node to settled
-        //step 6: step 1 - 5 until all nodes are settled
-        //step 7: create a list of nodes to get the order of nodes to travel through.
-        //step 7.1: add the destination node to the list
-        //step 8: check the node that's last in the list to check it's previous node and add it to the list
+        toBeTraversed.add(origin);
+        while(!toBeTraversed.isEmpty()) {
+            float lowestDestinationCost = Integer.MAX_VALUE;
+            Node currentNode = toBeTraversed.iterator().next(); //needs to be initialized here, if for some reason the if statement fails
+            //step 1: choose an unsettled node with least amount of destination cost
+            for (Node n: toBeTraversed) {
+                if (destinationCostMap.get(n) < lowestDestinationCost) {
+                    lowestDestinationCost = destinationCostMap.get(n);
+                    currentNode = n;
+                }
+            }
+            for(Edge e: currentNode.getEdges()) {
+                Node dest = e.getTheOtherNode(currentNode);//this is the node that is connected to the current node with the edge e
+                if(!traversed.contains(dest)){
+                    float currentCost = destinationCostMap.get(currentNode) + e.getWeight();
+                    //step 2: iterate through each edge that is not settled on that iterated node, add these nodes to unsettled.
+                    toBeTraversed.add(dest);
+                    //if the current route cost is cheaper than the one already in the table
+                    //do steps 3 & 4
+                    if(currentCost < destinationCostMap.get(dest)) {
+                        //step 3: add total destination cost to each of these neighbors
+                        destinationCostMap.replace(dest,currentCost);
+                        //step 4: add the iterated node to each neighbor's edge taken table.
+                        edgeTakenMap.replace(dest,e);
+                    }
+                }
+            }
+            //step 5: add the iterated node to settled
+            toBeTraversed.remove(currentNode);
+            traversed.add(currentNode);
+            //step 6: step 1 - 5 until all nodes are settled
+        }
+        //step 7: create a list of edges to get the order of edges to travel through.
+        LinkedList<Edge> dijkstraPath = new LinkedList<>();
+        //create a current destination node
+        Node dest = destination;
+        while(!dest.equals(origin)) {
+            //step 8: add the edge that's taken from the current destination node to the route list.
+
+            dijkstraPath.add(edgeTakenMap.get(dest));
+            dest = dijkstraPath.getLast().getTheOtherNode(dest);
+        }
         //step 9: step 8 until reached the origin
         //step 10: return the list.
+        Collections.reverse(dijkstraPath);
+        return dijkstraPath;
+    }
 
-        return null;
+    public LinkedList<Node> getNodes() {
+        return nodes;
+    }
+
+    public Set<Edge> getEdges() {
+        return edges;
     }
 }
