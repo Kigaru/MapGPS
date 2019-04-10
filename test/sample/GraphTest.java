@@ -27,7 +27,7 @@ class GraphTest {
         c = new Node("c", 2, 2);
         d = new Node("d", 3, 3);
         e = new Node("e", 4, 4);
-        graph.addAllNodes(a, b, c, d, e);
+        graph.addNode(a, b, c, d, e);
 
         ab1 = new Edge(a, b, 1);
         ac2 = new Edge(a, c, 2);
@@ -59,7 +59,7 @@ class GraphTest {
         r = new Node("r", 17,17);
         s = new Node("s", 18,18);
         t = new Node("t", 19,19);
-        complexGraph.addAllNodes(u,v,w,x,y,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t);
+        complexGraph.addNode(u,v,w,x,y,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t);
 
         uv20 = new Edge(u, v, 20);
         uw4 = new Edge(u, w, 4);

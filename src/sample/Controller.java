@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
@@ -25,6 +24,8 @@ public class Controller {
     File imageFile;
     Graph graph;
     Image image;
+
+
     public void loadImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose an image...");
@@ -35,49 +36,47 @@ public class Controller {
             imageView.setImage(image);
 
 
-
-
             //hardcode nodes for now i guess
             graph = new Graph();
 
-            Node townA = new Node("Town A", 94,55);
-            Node townB = new Node("Town B", 356,47);
-            Node townC = new Node("Town C", 237,118);
-            Node townD = new Node("Town D", 70,183);
-            Node townE = new Node("Town E", 404,228);
-            Node townF = new Node("Town F", 199,286);
-            Node townG = new Node("Town G", 396,367);
-            Node townH = new Node("Town H", 127,417);
+            Node townA = new Node("Town A", 94, 55);
+            Node townB = new Node("Town B", 356, 47);
+            Node townC = new Node("Town C", 237, 118);
+            Node townD = new Node("Town D", 70, 183);
+            Node townE = new Node("Town E", 404, 228);
+            Node townF = new Node("Town F", 199, 286);
+            Node townG = new Node("Town G", 396, 367);
+            Node townH = new Node("Town H", 127, 417);
+
+            graph.addNode(townA, townB, townC, townD, townE, townF, townG);
+            graph.addNode(townH);
+
+            graph.addEdge(new Edge(townA, townB, 5));
+            graph.addEdge(new Edge(townB, townC, 3));
+            graph.addEdge(new Edge(townA, townC, 7));
+            graph.addEdge(new Edge(townD, townC, 4));
+            graph.addEdge(new Edge(townC, townE, 2));
+            graph.addEdge(new Edge(townC, townF, 5));
+            graph.addEdge(new Edge(townD, townF, 4));
+            graph.addEdge(new Edge(townE, townF, 9));
+            graph.addEdge(new Edge(townF, townH, 6));
+            graph.addEdge(new Edge(townF, townG, 7));
+            graph.addEdge(new Edge(townG, townH, 14));
 
 
-            new Edge(townA,townB,5);
-            new Edge(townB,townC,3);
-            new Edge(townA,townC,7);
-            new Edge(townD,townC,4);
-            new Edge(townC,townE,2);
-            new Edge(townC,townF,5);
-            new Edge(townD,townF,4);
-            new Edge(townE,townF,9);
-            new Edge(townF,townH,6);
-            new Edge(townF,townG,7);
-            new Edge(townG,townH,14);
-
-            graph.addAllNodes(townA, townB, townC, townD, townE, townF, townG, townH);
-
-            for(Node n: graph.getNodes()) { //TODO display of nodes to not contain a "Node: " in choice boxes
+            for (Node n : graph.getNodes()) { //TODO display of nodes to not contain a "Node: " in choice boxes
                 fromChoice.getItems().add(n);
                 toChoice.getItems().add(n);
             }
 
 
-
             BufferedImage awtImage = SwingFXUtils.fromFXImage(imageView.getImage(), null);
             Graphics graphics = awtImage.getGraphics();
             graphics.setColor(Color.BLACK);
-            for(Node n : graph.getNodes()) drawNode(graphics,n);
-
+            for (Node n : graph.getNodes()) drawNode(graphics, n);
+            for (Edge e : graph.getEdges()) drawEdge(graphics, e);
             graphics.dispose(); //IMPORTANT TO PREVENT MEMORY LEAKS
-            image = SwingFXUtils.toFXImage(awtImage,null);
+            image = SwingFXUtils.toFXImage(awtImage, null);
             imageView.setImage(image);
 
         }
@@ -90,6 +89,9 @@ public class Controller {
      */
     private void drawNode(Graphics imageGraphics,Node node) {
             imageGraphics.drawOval(node.getX(),node.getY(),10,10);
+    }
+    private void drawEdge(Graphics imageGraphics,Edge edge) {
+            imageGraphics.drawLine(edge.getOrigin().getX(),edge.getOrigin().getY(),edge.getDestination().getX(),edge.getDestination().getY());
     }
 
     public void findPath() {

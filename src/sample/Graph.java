@@ -1,24 +1,28 @@
 package sample;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 public class Graph {
-    public LinkedList<Node> getNodes() {
-        return nodes;
-    }
-
     private LinkedList<Node> nodes;
+    private HashSet<Edge> edges;
 
     public Graph() {
     nodes = new LinkedList<>();
-}
-
-    public void addNode(Node n) {
-        nodes.add(n);
+    edges = new HashSet<>();
     }
 
-    public void addAllNodes(Node... n){
+//    public void addNode(Node n) {
+//        nodes.add(n);
+//    }
+
+    public void addNode(Node... n){
         for (Node node: n) nodes.add(node);
+    }
+
+    public void addEdge(Edge... e){
+        for(Edge edge : e) edges.add(edge);
     }
 
     public LinkedList<Edge> dijkstra(Node origin, Node destination) {
@@ -82,4 +86,11 @@ public class Graph {
         return dijkstraPath;
     }
 
+    public LinkedList<Node> getNodes() {
+        return nodes;
+    }
+
+    public Set<Edge> getEdges() {
+        return edges;
+    }
 }
