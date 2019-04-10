@@ -1,14 +1,13 @@
 package sample;
 
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.LinkedList;
 
@@ -19,7 +18,7 @@ public class Controller {
     ChoiceBox<Node> fromChoice, toChoice;
 
     @FXML
-    ImageView imageView;
+    Canvas canvas;
 
     File imageFile;
     Graph graph;
@@ -29,12 +28,13 @@ public class Controller {
     public void loadImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose an image...");
-        imageFile = fileChooser.showOpenDialog(imageView.getScene().getWindow());
+        imageFile = fileChooser.showOpenDialog(canvas.getScene().getWindow());
 
         if (imageFile != null) {
             image = new Image(imageFile.toURI().toString());
-            imageView.setImage(image);
 
+            GraphicsContext gc = canvas.getGraphicsContext2D();
+            gc.drawImage(image,0,0);
 
             //hardcode nodes for now i guess
             graph = new Graph();
@@ -70,14 +70,14 @@ public class Controller {
             }
 
 
-            BufferedImage awtImage = SwingFXUtils.fromFXImage(imageView.getImage(), null);
-            Graphics graphics = awtImage.getGraphics();
-            graphics.setColor(Color.BLACK);
-            for (Node n : graph.getNodes()) drawNode(graphics, n);
-            for (Edge e : graph.getEdges()) drawEdge(graphics, e);
-            graphics.dispose(); //IMPORTANT TO PREVENT MEMORY LEAKS
-            image = SwingFXUtils.toFXImage(awtImage, null);
-            imageView.setImage(image);
+
+            gc.setFill(Color.BLACK);
+            for (Node n : graph.getNodes()) drawNode(gc, n);
+            for (Edge e : graph.getEdges()) drawEdge(gc, e);
+
+//            graphics.dispose(); //IMPORTANT TO PREVENT MEMORY LEAKS
+//            image = SwingFXUtils.toFXImage(awtImage, null);
+//            imageView.setImage(image);
 
         }
     }
@@ -87,33 +87,21 @@ public class Controller {
      * @param imageGraphics The graphics instance (awt) of the image
      * @param node The node to draw a circle around
      */
-    private void drawNode(Graphics imageGraphics,Node node) {
-            imageGraphics.drawOval(node.getX(),node.getY(),10,10);
+    private void drawNode(GraphicsContext imageGraphics,Node node) {
+            imageGraphics.strokeOval(node.getX(),node.getY(),10,10);
     }
-    private void drawEdge(Graphics imageGraphics,Edge edge) {
-            imageGraphics.drawLine(edge.getOrigin().getX(),edge.getOrigin().getY(),edge.getDestination().getX(),edge.getDestination().getY());
+    private void drawEdge(GraphicsContext imageGraphics,Edge edge) {
+            imageGraphics.strokeLine(edge.getOrigin().getX(),edge.getOrigin().getY(),edge.getDestination().getX(),edge.getDestination().getY());
     }
 
     public void findPath() {
         if(fromChoice.getValue() != null && toChoice.getValue() != null) {
-            LinkedList<Edge> path = graph.dijkstra(fromChoice.getValue(), toChoice.getValue());
-
-            BufferedImage awtImage = SwingFXUtils.fromFXImage(image, null);
-            Graphics graphics = awtImage.getGraphics();
-
-            graphics.setColor(Color.RED);
-
+            LinkedList<Edge> path = graph.dijkstra(fromChoice.getValue(), toChoice.getValue());//TODO reset path at start
+            GraphicsContext gc = canvas.getGraphicsContext2D();
+            gc.setStroke(Color.RED);
             for(Edge e: path) {
-                graphics.drawLine(e.getOrigin().getX(),e.getOrigin().getY(),e.getDestination().getX(),e.getDestination().getY());
+                gc.strokeLine(e.getOrigin().getX(),e.getOrigin().getY(),e.getDestination().getX(),e.getDestination().getY());
             }
-
-
-            graphics.dispose(); //IMPORTANT TO PREVENT MEMORY LEAKS
-
-            imageView.setImage(SwingFXUtils.toFXImage(awtImage,null));
-
-
-
         }
     }
 
