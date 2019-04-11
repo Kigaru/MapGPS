@@ -89,7 +89,7 @@ public class Controller {
 //            gfx.restoreImage();
             LinkedList<Edge> path = graph.dijkstra(fromChoice.getValue(), toChoice.getValue());
 
-            gfx.drawPath(path);
+            gfx.drawPath(path, fromChoice.getValue());
         }
     }
 
