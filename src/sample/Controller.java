@@ -81,9 +81,7 @@ public class Controller {
             for (Node n : graph.getNodes()) drawNode(gc, n, 5);
             for (Edge e : graph.getEdges()) drawEdge(gc, e);
 
-            SnapshotParameters params = new SnapshotParameters();
-            params.setFill(Color.TRANSPARENT);
-            routedImage = canvas.snapshot(params, null);
+            routedImage = canvas.snapshot(null, null);
         }
     }
 
