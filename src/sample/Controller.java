@@ -156,8 +156,8 @@ public class Controller {
             return graph;
         }
         catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("File may not exist... creating a new graph");
         }
-        return null;
+        return new Graph();
     }
 }
