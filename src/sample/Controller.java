@@ -30,7 +30,7 @@ import java.util.LinkedList;
 public class Controller {
 
     @FXML
-    private ListView waypointListView, avoidListView;
+    private ListView<Node> waypointListView, avoidListView;
     @FXML
     private StackPane stackPane;
     @FXML
@@ -143,16 +143,16 @@ public class Controller {
     private void calculatePath() {
         if(fromChoice.getValue() != null && toChoice.getValue() != null) {
 //            gfx.restoreImage();
-            LinkedList<Edge> path = graph.dijkstra(fromChoice.getValue(), toChoice.getValue(), criteriaChoice.getSelectionModel().getSelectedIndex());
+            LinkedList<Edge> path = graph.dijkstra(fromChoice.getValue(),
+                    toChoice.getValue(),
+                    criteriaChoice.getSelectionModel().getSelectedIndex(),
+                    avoidListView.getItems());
 
             gfx.drawPath(path, fromChoice.getValue());
         }
     }
 
-    @FXML
-    private void test(ActionEvent actionEvent) {
 
-    }
 
     @FXML
     private void clearPath(ActionEvent actionEvent) {

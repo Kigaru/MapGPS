@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.*;
@@ -26,7 +27,13 @@ public class Graph {
     }
 
 
-    public LinkedList<Edge> dijkstra(Node origin, Node destination, int criteria, Node[] avoid, Node[] waypoints) {
+
+    public LinkedList<Edge> dijkstra(Node origin, Node destination, int criteria) {
+        ObservableList<Node> list = FXCollections.observableArrayList();
+        return dijkstra(origin,destination,criteria,list);
+    }
+
+    public LinkedList<Edge> dijkstra(Node origin, Node destination, int criteria, ObservableList<Node> avoidList) {
         HashMap<Node,Float> destinationCostMap = new HashMap();
         HashMap<Node,Edge> edgeTakenMap = new HashMap<>();
         HashSet<Node> traversed = new HashSet<>();
