@@ -167,19 +167,25 @@
       <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination"/>
       <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[4]/destination/edges/sample.Edge[2]/origin"/>
       <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[4]/destination"/>
+      <sample.Node>
+        <edges/>
+        <name>asdf</name>
+        <x>0</x>
+        <y>0</y>
+      </sample.Node>
     </nodes>
     <edges>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[4]"/>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge"/>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[3]"/>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]"/>
       <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]"/>
       <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[4]/destination/edges/sample.Edge[2]/origin/edges/sample.Edge"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[3]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[4]"/>
       <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[4]/destination/edges/sample.Edge[2]"/>
       <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge"/>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[4]/destination/edges/sample.Edge[2]/origin/edges/sample.Edge"/>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge"/>
       <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/origin/edges/sample.Edge[2]/destination/edges/sample.Edge"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]"/>
     </edges>
   </sample.Graph>
 </object-stream>

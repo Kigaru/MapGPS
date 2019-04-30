@@ -133,6 +133,7 @@ public class Controller {
         toChoice.getItems().add(n);
     }
 
+    @FXML
     private void saveGraph() {
         try {
             XStream xstream = new XStream(new DomDriver());
