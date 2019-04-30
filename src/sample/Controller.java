@@ -25,15 +25,21 @@ public class Controller {
     private Image image;
 
 
+    @FXML
+    private void initialize(){
+        imageFile = new File("WhiteSquare.png");
+
+        loadImage();
+    }
 
 
     @FXML
     private void loadImage() {
         graph = new Graph();
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose an image...");
-        imageFile = fileChooser.showOpenDialog(canvas.getScene().getWindow());
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Choose an image...");
+//        imageFile = fileChooser.showOpenDialog(canvas.getScene().getWindow());
 
         if (imageFile != null) {
             image = new Image(imageFile.toURI().toString());

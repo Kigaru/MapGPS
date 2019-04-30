@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -7,6 +8,8 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.ArcType;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -33,12 +36,27 @@ public class Graphics {
 
         graphicsContext.setStroke(Color.RED);
         graphicsContext.setLineWidth(orgStrokeWidth*3);
+        graphicsContext.setTextAlign(TextAlignment.CENTER.CENTER);
+        graphicsContext.setTextBaseline(VPos.BOTTOM);
+        graphicsContext.setFont(Font.font(16));
+
 
         graphicsContext.drawImage(background, 0, 0);
         graphicsContext.beginPath();
         graphicsContext.moveTo(origin.getX(),origin.getY());
+        graphicsContext.fillText(
+                origin.getName(),
+                origin.getX(),
+                origin.getY()
+        );
+
         for(Edge e: path) {
             origin = e.getTheOtherNode(origin);
+            graphicsContext.fillText(
+                    origin.getName(),
+                    origin.getX(),
+                    origin.getY()
+            );
             graphicsContext.lineTo(origin.getX(),origin.getY());
         }
         graphicsContext.stroke();
@@ -62,5 +80,9 @@ public class Graphics {
 
     private void drawEdge(Edge e) {
         graphicsContext.strokeLine(e.getOrigin().getX(),e.getOrigin().getY(),e.getDestination().getX(),e.getDestination().getY());
+    }
+
+    private void drawName(Node node){
+
     }
 }

@@ -22,8 +22,8 @@ public class Main extends Application {
         }
         Controller controller = loader.getController();
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 600, 400));
-        primaryStage.setResizable(false);
+        primaryStage.setScene(new Scene(root, 800, 800));
+//        primaryStage.setResizable(true);
         primaryStage.show();
 
     }
