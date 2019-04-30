@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -51,8 +52,16 @@
                   <ChoiceBox fx:id="toChoice" layoutX="11.0" layoutY="98.0" onAction="#centerOnNode" prefHeight="25.0" prefWidth="129.0" />
                   <Label layoutX="11.0" layoutY="146.0" text="Criteria" />
                   <ChoiceBox fx:id="criteriaChoice" layoutX="11.0" layoutY="163.0" prefHeight="25.0" prefWidth="129.0" />
-                  <Button layoutX="13.0" layoutY="240.0" mnemonicParsing="false" onAction="#calculatePath" text="Show Path" />
-                  <Button layoutX="97.0" layoutY="240.0" mnemonicParsing="false" onAction="#clearPath" text="Clear" />
+                  <Button layoutX="12.0" layoutY="302.0" mnemonicParsing="false" onAction="#calculatePath" text="Show Path" />
+                  <Button layoutX="111.0" layoutY="302.0" mnemonicParsing="false" onAction="#clearPath" text="Clear" />
+                  <ListView fx:id="waypointListView" layoutX="11.0" layoutY="367.0" prefHeight="185.0" prefWidth="200.0" />
+                  <Label layoutX="11.0" layoutY="201.0" text="Extra conditions" />
+                  <ChoiceBox fx:id="extraChoiceBox" layoutX="11.0" layoutY="218.0" prefHeight="25.0" prefWidth="129.0" />
+                  <Button layoutX="11.0" layoutY="253.0" mnemonicParsing="false" onAction="#addToAvoidList" text="Add to avoid" />
+                  <ListView fx:id="avoidListView" layoutX="11.0" layoutY="576.0" prefHeight="185.0" prefWidth="200.0" />
+                  <Button layoutX="111.0" layoutY="253.0" mnemonicParsing="false" onAction="#addToWaypointList" text="Add to waypoints" />
+                  <Label layoutX="11.0" layoutY="350.0" text="Waypoints" />
+                  <Label layoutX="11.0" layoutY="559.0" text="Avoiding" />
                </children>
             </Pane>
          </children>

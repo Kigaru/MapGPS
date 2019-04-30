@@ -4,7 +4,6 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,11 +12,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -28,27 +29,41 @@ import java.util.LinkedList;
 public class Controller {
 
     @FXML
+    private ListView waypointListView, avoidListView;
+    @FXML
     private StackPane stackPane;
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private ChoiceBox<Node> fromChoice, toChoice;
+    private ChoiceBox<Node> fromChoice, toChoice, extraChoiceBox;
     @FXML
     private ChoiceBox<String> criteriaChoice;
     @FXML
     private Canvas canvas;
 
     private Graphics gfx;
-
     private File imageFile;
     private Graph graph;
     private Image image;
+
+    EventHandler<MouseEvent> listDeletionHandler = mouseEvent -> {
+        MouseButton button = mouseEvent.getButton();
+        if(button==MouseButton.SECONDARY){
+            {
+                ListView<Node> list = ((ListView<Node>) mouseEvent.getSource());
+                Node toRemove = list.getSelectionModel().getSelectedItem();
+                list.getItems().remove(toRemove);
+            }
+        }
+    };
 
 
     @FXML
     private void initialize(){
         imageFile = new File("src/sample/gotMap.jpg");
 
+        waypointListView.setOnMouseClicked(listDeletionHandler);
+        avoidListView.setOnMouseClicked(listDeletionHandler);
         loadImage();
     }
 
@@ -181,6 +196,7 @@ public class Controller {
 
         fromChoice.setItems(list);
         toChoice.setItems(list);
+        extraChoiceBox.setItems(list);
     }
 
     @FXML
@@ -218,4 +234,15 @@ public class Controller {
         scrollPane.setVvalue(y/image.getHeight());
     }
 
+    @FXML
+    private void addToAvoidList(ActionEvent actionEvent) {
+        Node n = extraChoiceBox.getSelectionModel().getSelectedItem();
+        avoidListView.getItems().add(n);
+    }
+
+    @FXML
+    private void addToWaypointList(ActionEvent actionEvent) {
+        Node n = extraChoiceBox.getSelectionModel().getSelectedItem();
+        waypointListView.getItems().add(n);
+    }
 }
