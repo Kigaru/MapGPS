@@ -154,12 +154,18 @@ public class Controller {
             float diff = 0;
             float safety = 0;
 
-            for (Edge e:path)
-                length += e.getWeight()[criteria];
+            for (Edge e:path) {
+                length += e.getWeight()[0];
+                diff += e.getWeight()[1];
+                safety += e.getWeight()[2];
+            }
 
             Stage stage = ((Stage)canvas.getScene().getWindow());
 
-            stage.setTitle("The route from " + origin.getName() +
+            if(path.size() < 1)
+                stage.setTitle("No valid route found.");
+            else
+                stage.setTitle("The route from " + origin.getName() +
                      " to " + destination.getName() + " is approximately " +
                     length * 1.82 + " miles long. It's difficulty score is: " + diff +
                     ". It's danger score is: " + safety + ".");
