@@ -3,14 +3,19 @@ package sample;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -19,6 +24,8 @@ import java.util.LinkedList;
 
 public class Controller {
 
+    @FXML
+    private StackPane stackPane;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -49,49 +56,14 @@ public class Controller {
 
         if (imageFile != null) {
             image = new Image(imageFile.toURI().toString());
-            canvas.setHeight(image.getHeight());
-            canvas.setWidth(image.getWidth());
 
-            scrollPane.setFitToHeight(true);
-            scrollPane.setFitToWidth(true);
-            scrollPane.setHmax(image.getWidth());
-            scrollPane.setVmax(image.getHeight());
-            scrollPane.setPannable(true);
-            System.out.println("scrollPane.isPannable() = " + scrollPane.isPannable());
+            setUpView();
 
             graph = loadGraph();
 
             for (Node n : graph.getNodes()) {
                 addToChoiceBoxes(n);
             }
-            /*
-            //hardcode nodes for now i guess
-
-
-            Node townA = new Node("Town A", 94, 55);
-            Node townB = new Node("Town B", 356, 47);
-            Node townC = new Node("Town C", 237, 118);
-            Node townD = new Node("Town D", 70, 183);
-            Node townE = new Node("Town E", 404, 228);
-            Node townF = new Node("Town F", 199, 286);
-            Node townG = new Node("Town G", 396, 367);
-            Node townH = new Node("Town H", 127, 417);
-
-            graph.addNode(townA, townB, townC, townD, townE, townF, townG);
-            graph.addNode(townH);
-
-            graph.addEdge(new Edge(townA, townB, 5, 3, 11));
-            graph.addEdge(new Edge(townB, townC, 3, 5, 23));
-            graph.addEdge(new Edge(townA, townC, 7, 7, 1));
-            graph.addEdge(new Edge(townD, townC, 4, 12, 3));
-            graph.addEdge(new Edge(townC, townE, 2, 1, 2));
-            graph.addEdge(new Edge(townC, townF, 5, 84, 55));
-            graph.addEdge(new Edge(townD, townF, 4, 13,4));
-            graph.addEdge(new Edge(townE, townF, 9, 123, 87));
-            graph.addEdge(new Edge(townF, townH, 6, 1, 5));
-            graph.addEdge(new Edge(townF, townG, 7, 8, 23));
-            graph.addEdge(new Edge(townG, townH, 14, 88, 9));
-            */
 
             criteriaChoice.getItems().addAll("Length", "Difficulty", "Safety");
             criteriaChoice.getSelectionModel().selectFirst();
@@ -99,6 +71,44 @@ public class Controller {
             //////////////////////////////////////// GFX
             redrawMap();
         }
+    }
+
+    private void setUpView() {
+        canvas.setHeight(image.getHeight());
+        canvas.setWidth(image.getWidth());
+
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setPannable(true);
+
+        Group zoomGroup = new Group();
+        zoomGroup.getChildren().add(canvas);
+        scrollPane.setContent(zoomGroup);
+
+        scrollPane.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent event) {
+                double delta = 1.1;
+                double factor = canvas.getScaleX();
+
+                if (event.getDeltaY() < 0) {
+                    factor /= delta;
+                } else {
+                    factor *= delta;
+                }
+
+                if (factor < .2 || factor > 5) {
+                    factor = factor < .2 ? .2 : 5;
+                }
+
+                canvas.setScaleX(factor);
+                canvas.setScaleY(factor);
+                
+                scrollPane.setHvalue(event.getSceneX()/scrollPane.getWidth());
+                scrollPane.setVvalue(event.getSceneY()/scrollPane.getHeight());
+
+                event.consume();
+            }});
     }
 
     @FXML
@@ -191,4 +201,5 @@ public class Controller {
         scrollPane.setHvalue(x);
         scrollPane.setVvalue(y);
     }
+
 }

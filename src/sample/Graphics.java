@@ -69,8 +69,8 @@ public class Graphics {
     private Image drawMap(LinkedList<Node> nodes, Set<Edge> edges, Image image) {
         graphicsContext.drawImage(image, 0, 0); //Defaulting to 0 (see no need for anything else rn)
         for (Node n : nodes) {
-            drawNode(n, 15);
-            drawName(n);
+            drawNode(n, 10);
+//            drawName(n);
         }
         for (Edge e : edges) drawEdge(e);
 
@@ -78,7 +78,9 @@ public class Graphics {
     }
 
     private void drawNode(Node n, int radius) {
+        Color color = new Color(0,0,0,.75);
         graphicsContext.setLineWidth(3);
+        graphicsContext.setStroke(color);
         graphicsContext.strokeArc(n.getX() - radius, n.getY() - radius, radius * 2, radius * 2,0, 360, ArcType.OPEN);
     }
 
