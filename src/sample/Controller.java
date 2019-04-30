@@ -190,7 +190,5 @@ public class Controller {
         int y = ((ChoiceBox<Node>)actionEvent.getSource()).getSelectionModel().getSelectedItem().getY();
         scrollPane.setHvalue(x);
         scrollPane.setVvalue(y);
-
-
     }
 }

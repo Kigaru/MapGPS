@@ -48,7 +48,7 @@
                   <Label layoutX="14.0" layoutY="24.0" text="From" />
                   <ChoiceBox fx:id="fromChoice" layoutX="11.0" layoutY="41.0" prefHeight="25.0" prefWidth="129.0" onAction="#centerOnNode" />
                   <Label layoutX="11.0" layoutY="81.0" text="To" />
-                  <ChoiceBox fx:id="toChoice" layoutX="11.0" layoutY="98.0" prefHeight="25.0" prefWidth="129.0" />
+                  <ChoiceBox fx:id="toChoice" layoutX="11.0" layoutY="98.0" prefHeight="25.0" prefWidth="129.0" onAction="#centerOnNode"/>
                   <Label layoutX="11.0" layoutY="146.0" text="Criteria" />
                   <ChoiceBox fx:id="criteriaChoice" layoutX="11.0" layoutY="163.0" prefHeight="25.0" prefWidth="129.0" />
                   <Button layoutX="13.0" layoutY="240.0" mnemonicParsing="false" onAction="#calculatePath" text="Show Path" />
