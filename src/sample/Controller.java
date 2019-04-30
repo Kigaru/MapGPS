@@ -32,8 +32,6 @@ public class Controller {
     @FXML
     private ListView<Node> waypointListView, avoidListView;
     @FXML
-    private StackPane stackPane;
-    @FXML
     private ScrollPane scrollPane;
     @FXML
     private ChoiceBox<Node> fromChoice, toChoice, extraChoiceBox;
@@ -47,7 +45,7 @@ public class Controller {
     private Graph graph;
     private Image image;
 
-    EventHandler<MouseEvent> listDeletionHandler = mouseEvent -> {
+    private EventHandler<MouseEvent> listDeletionHandler = mouseEvent -> {
         MouseButton button = mouseEvent.getButton();
         if(button==MouseButton.SECONDARY){
             {
@@ -58,7 +56,6 @@ public class Controller {
         }
     };
 
-
     @FXML
     private void initialize(){
         imageFile = new File("src/sample/gotMap.jpg");
@@ -67,7 +64,6 @@ public class Controller {
         avoidListView.setOnMouseClicked(listDeletionHandler);
         loadImage();
     }
-
 
     @FXML
     private void loadImage() {
@@ -143,16 +139,44 @@ public class Controller {
     private void calculatePath() {
         if(fromChoice.getValue() != null && toChoice.getValue() != null) {
 //            gfx.restoreImage();
-            LinkedList<Edge> path = graph.dijkstra(fromChoice.getValue(),
-                    toChoice.getValue(),
-                    criteriaChoice.getSelectionModel().getSelectedIndex(),
-                    avoidListView.getItems());
+
+            LinkedList<Edge> path;
+
+            if(waypointListView.getItems().size() > 0)
+                path = pathThroughWaypoints();
+            else
+                path = graph.dijkstra(fromChoice.getValue(),
+                        toChoice.getValue(),
+                        criteriaChoice.getSelectionModel().getSelectedIndex(),
+                        avoidListView.getItems());
 
             gfx.drawPath(path, fromChoice.getValue());
         }
     }
 
+    private LinkedList<Edge> pathThroughWaypoints() {
+        ArrayList<Node> waypoints = new ArrayList<>();
+        LinkedList<Edge> path = new LinkedList<>();
 
+        waypoints.add(fromChoice.getValue());
+        for (Node n: waypointListView.getItems()) {
+            waypoints.add(n);
+        }
+        waypoints.add(toChoice.getValue());
+
+        for (int i = 0; i < waypoints.size() - 1; i++) {
+            LinkedList<Edge> dijkstra = graph.dijkstra(waypoints.get(i),
+                    waypoints.get(i + 1),
+                    criteriaChoice.getSelectionModel().getSelectedIndex(),
+                    avoidListView.getItems());
+
+            for (Edge e : dijkstra) {
+                path.add(e);
+            }
+        }
+
+        return path;
+    }
 
     @FXML
     private void clearPath(ActionEvent actionEvent) {

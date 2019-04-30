@@ -19,9 +19,9 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#test" text="New" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadImage" text="Load" />
-                  <MenuItem mnemonicParsing="false" onAction="#saveGraph" text="Save" />
+              <MenuItem mnemonicParsing="false" text="New" />
+              <MenuItem mnemonicParsing="false" onAction="#loadImage" text="Load" />
+              <MenuItem mnemonicParsing="false" onAction="#saveGraph" text="Save" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
