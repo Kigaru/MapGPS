@@ -137,18 +137,32 @@ public class Controller {
 
     @FXML
     private void calculatePath() {
-        if(fromChoice.getValue() != null && toChoice.getValue() != null) {
-//            gfx.restoreImage();
+        Node origin = fromChoice.getValue();
+        Node destination = toChoice.getValue();
 
+        if(origin != null && destination != null) {
             LinkedList<Edge> path;
+
+            int criteria = criteriaChoice.getSelectionModel().getSelectedIndex();
 
             if(waypointListView.getItems().size() > 0)
                 path = pathThroughWaypoints();
             else
-                path = graph.dijkstra(fromChoice.getValue(),
-                        toChoice.getValue(),
-                        criteriaChoice.getSelectionModel().getSelectedIndex(),
-                        avoidListView.getItems());
+                path = graph.dijkstra(origin, destination, criteria, avoidListView.getItems());
+
+            float length = 0;
+            float diff = 0;
+            float safety = 0;
+
+            for (Edge e:path)
+                length += e.getWeight()[criteria];
+
+            Stage stage = ((Stage)canvas.getScene().getWindow());
+
+            stage.setTitle("The route from " + origin.getName() +
+                     " to " + destination.getName() + " is approximately " +
+                    length * 1.82 + " miles long. It's difficulty score is: " + diff +
+                    ". It's danger score is: " + safety + ".");
 
             gfx.drawPath(path, fromChoice.getValue());
         }
