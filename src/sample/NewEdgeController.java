@@ -8,6 +8,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.Comparator;
+
 
 public class NewEdgeController {
     public ChoiceBox<sample.Node> choiceBoxFrom;
@@ -39,6 +41,8 @@ public class NewEdgeController {
             choiceBoxFrom.getItems().add(n);
             choiceBoxTo.getItems().add(n);
         }
+        choiceBoxFrom.getItems().sort(Comparator.comparing(sample.Node::getName));
+        choiceBoxTo.getItems().sort(Comparator.comparing(sample.Node::getName));
     }
 
     @FXML
