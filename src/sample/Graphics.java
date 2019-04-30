@@ -22,12 +22,12 @@ public class Graphics {
     private Image background;
     private Graph graph;
 
-    public Graphics(Canvas canvas, Image image, Graph graph){ //add map image to constructor?
+    public Graphics(Canvas canvas, Image image, Graph graph, boolean showAllRoutes){ //add map image to constructor?
         this.canvas = canvas;
         this.graphicsContext = canvas.getGraphicsContext2D();
         this.graph = graph;
         this.sourceImage = image;
-        this.background = drawMap(graph.getNodes(), graph.getEdges(), sourceImage);
+        this.background = drawMap(graph.getNodes(), graph.getEdges(), sourceImage, showAllRoutes);
         graphicsContext.drawImage(background, 0, 0);
     }
 
@@ -35,10 +35,8 @@ public class Graphics {
         graphicsContext.drawImage(background, 0,0);
     }
 
-    public void redraw(){
-        System.out.println("Redrawing");
-        this.background = drawMap(graph.getNodes(), graph.getEdges(), sourceImage);
-        restoreImage();
+    public void redraw(boolean showAllRoutes){
+        this.background = drawMap(graph.getNodes(), graph.getEdges(), sourceImage, showAllRoutes);
     }
 
     public void drawPath(LinkedList<Edge> path, Node origin){
@@ -66,13 +64,15 @@ public class Graphics {
         graphicsContext.setStroke(orgPaint);
     }
 
-    private Image drawMap(LinkedList<Node> nodes, Set<Edge> edges, Image image) {
+    private Image drawMap(LinkedList<Node> nodes, Set<Edge> edges, Image image, boolean showAllRoutes) {
+        graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight()); //clear canvas before drawing background again.
         graphicsContext.drawImage(image, 0, 0); //Defaulting to 0 (see no need for anything else rn)
         for (Node n : nodes) {
             drawNode(n, 10);
 //            drawName(n);
         }
-        for (Edge e : edges) drawEdge(e);
+        if (showAllRoutes)
+            for (Edge e : edges) drawEdge(e);
 
         return canvas.snapshot(null, null);
     }

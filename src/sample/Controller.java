@@ -11,6 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -29,6 +30,8 @@ import java.util.LinkedList;
 
 public class Controller {
 
+    @FXML
+    private CheckMenuItem allRoutesCheck;
     @FXML
     private ListView<Node> waypointListView, avoidListView;
     @FXML
@@ -200,6 +203,8 @@ public class Controller {
 
     @FXML
     private void clearPath(ActionEvent actionEvent) {
+        waypointListView.getItems().clear();
+        avoidListView.getItems().clear();
         gfx.restoreImage();
     }
 
@@ -230,8 +235,8 @@ public class Controller {
     }
 
     public void redrawMap(){
-        if(gfx == null) gfx = new Graphics(canvas, image, graph);
-        else gfx.redraw();
+        if(gfx == null) gfx = new Graphics(canvas, image, graph, allRoutesCheck.isSelected());
+        else gfx.redraw(allRoutesCheck.isSelected());
     }
 
     public void addToChoiceBoxes(Node n) {
