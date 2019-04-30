@@ -98,7 +98,7 @@ class GraphTest {
      one = new Node("single city", 0,0);
      Graph singleGraph = new Graph();
      singleGraph.addNode(one);
-     //assertTrue(singleGraph.dijkstra(one,one, 0).isEmpty());
+     assertTrue(singleGraph.dijkstra(one,one, 0).isEmpty());
     }
 
     @Test
@@ -107,7 +107,7 @@ class GraphTest {
         route.add(ac2);
         route.add(ec4);
 
-        //assertTrue(graph.dijkstra(a, e, 0).equals(route));
+        assertTrue(graph.dijkstra(a, e, 0).equals(route));
     }
 
     @Test
@@ -125,6 +125,6 @@ class GraphTest {
         route.add(uv20);
         route.add(vy5);
 
-        //assertTrue(complexGraph.dijkstra(s,y, 0).equals(route));
+        assertTrue(complexGraph.dijkstra(s,y, 0).equals(route));
     }
 }

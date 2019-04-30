@@ -41,6 +41,140 @@
                                     </weight>
                                   </sample.Edge>
                                   <sample.Edge reference="../../.."/>
+                                  <sample.Edge>
+                                    <origin reference="../../.."/>
+                                    <destination>
+                                      <edges>
+                                        <sample.Edge reference="../../.."/>
+                                        <sample.Edge>
+                                          <origin reference="../../.."/>
+                                          <destination>
+                                            <edges>
+                                              <sample.Edge>
+                                                <origin reference="../../../../../../../../../../../.."/>
+                                                <destination reference="../../.."/>
+                                                <weight>
+                                                  <float>185.0</float>
+                                                  <float>4.0</float>
+                                                  <float>8.0</float>
+                                                </weight>
+                                              </sample.Edge>
+                                              <sample.Edge reference="../../.."/>
+                                              <sample.Edge>
+                                                <origin reference="../../.."/>
+                                                <destination>
+                                                  <edges>
+                                                    <sample.Edge>
+                                                      <origin reference="../../../../../../../../.."/>
+                                                      <destination reference="../../.."/>
+                                                      <weight>
+                                                        <float>320.0</float>
+                                                        <float>12.0</float>
+                                                        <float>21.0</float>
+                                                      </weight>
+                                                    </sample.Edge>
+                                                    <sample.Edge reference="../../.."/>
+                                                    <sample.Edge>
+                                                      <origin reference="../../.."/>
+                                                      <destination>
+                                                        <edges>
+                                                          <sample.Edge reference="../../.."/>
+                                                        </edges>
+                                                        <name>Oldtown</name>
+                                                        <x>515</x>
+                                                        <y>2076</y>
+                                                      </destination>
+                                                      <weight>
+                                                        <float>175.0</float>
+                                                        <float>4.0</float>
+                                                        <float>8.0</float>
+                                                      </weight>
+                                                    </sample.Edge>
+                                                    <sample.Edge>
+                                                      <origin reference="../../.."/>
+                                                      <destination>
+                                                        <edges>
+                                                          <sample.Edge>
+                                                            <origin reference="../../../../../../../../.."/>
+                                                            <destination reference="../../.."/>
+                                                            <weight>
+                                                              <float>225.0</float>
+                                                              <float>5.0</float>
+                                                              <float>13.0</float>
+                                                            </weight>
+                                                          </sample.Edge>
+                                                          <sample.Edge reference="../../.."/>
+                                                        </edges>
+                                                        <name>Storm&apos;s End</name>
+                                                        <x>1126</x>
+                                                        <y>1876</y>
+                                                      </destination>
+                                                      <weight>
+                                                        <float>500.0</float>
+                                                        <float>13.0</float>
+                                                        <float>47.0</float>
+                                                      </weight>
+                                                    </sample.Edge>
+                                                  </edges>
+                                                  <name>Highgarden</name>
+                                                  <x>632</x>
+                                                  <y>1941</y>
+                                                </destination>
+                                                <weight>
+                                                  <float>450.0</float>
+                                                  <float>9.0</float>
+                                                  <float>17.0</float>
+                                                </weight>
+                                              </sample.Edge>
+                                              <sample.Edge reference="../sample.Edge[3]/destination/edges/sample.Edge[4]/destination/edges/sample.Edge"/>
+                                              <sample.Edge>
+                                                <origin>
+                                                  <edges>
+                                                    <sample.Edge>
+                                                      <origin reference="../../../../../../../../../../../../../../.."/>
+                                                      <destination reference="../../.."/>
+                                                      <weight>
+                                                        <float>250.0</float>
+                                                        <float>8.0</float>
+                                                        <float>15.0</float>
+                                                      </weight>
+                                                    </sample.Edge>
+                                                    <sample.Edge reference="../../.."/>
+                                                  </edges>
+                                                  <name>Dragonstone</name>
+                                                  <x>1094</x>
+                                                  <y>1588</y>
+                                                </origin>
+                                                <destination reference="../../.."/>
+                                                <weight>
+                                                  <float>165.0</float>
+                                                  <float>3.0</float>
+                                                  <float>10.0</float>
+                                                </weight>
+                                              </sample.Edge>
+                                            </edges>
+                                            <name>King&apos;s Landing</name>
+                                            <x>979</x>
+                                            <y>1708</y>
+                                          </destination>
+                                          <weight>
+                                            <float>470.0</float>
+                                            <float>15.0</float>
+                                            <float>26.0</float>
+                                          </weight>
+                                        </sample.Edge>
+                                        <sample.Edge reference="../sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge"/>
+                                      </edges>
+                                      <name>Lannisport</name>
+                                      <x>517</x>
+                                      <y>1648</y>
+                                    </destination>
+                                    <weight>
+                                      <float>270.0</float>
+                                      <float>8.0</float>
+                                      <float>17.0</float>
+                                    </weight>
+                                  </sample.Edge>
                                 </edges>
                                 <name>Riverrun</name>
                                 <x>750</x>
@@ -52,20 +186,38 @@
                                 <float>4.0</float>
                               </weight>
                             </sample.Edge>
+                            <sample.Edge reference="../sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[5]/origin/edges/sample.Edge"/>
+                            <sample.Edge reference="../sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge"/>
                             <sample.Edge>
                               <origin reference="../../.."/>
                               <destination>
                                 <edges>
                                   <sample.Edge reference="../../.."/>
+                                  <sample.Edge>
+                                    <origin>
+                                      <edges>
+                                        <sample.Edge reference="../../.."/>
+                                      </edges>
+                                      <name>Guilltown</name>
+                                      <x>1210</x>
+                                      <y>1432</y>
+                                    </origin>
+                                    <destination reference="../../.."/>
+                                    <weight>
+                                      <float>175.0</float>
+                                      <float>4.0</float>
+                                      <float>10.0</float>
+                                    </weight>
+                                  </sample.Edge>
                                 </edges>
-                                <name>Dragonstone</name>
-                                <x>1094</x>
-                                <y>1588</y>
+                                <name>The Eyrie</name>
+                                <x>1038</x>
+                                <y>1391</y>
                               </destination>
                               <weight>
-                                <float>250.0</float>
-                                <float>8.0</float>
-                                <float>15.0</float>
+                                <float>200.0</float>
+                                <float>6.0</float>
+                                <float>13.0</float>
                               </weight>
                             </sample.Edge>
                           </edges>
@@ -279,37 +431,12 @@
       </sample.Node>
       <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination"/>
       <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination"/>
-      <sample.Node>
-        <edges/>
-        <name>The Eyrie</name>
-        <x>1038</x>
-        <y>1391</y>
-      </sample.Node>
+      <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[6]/destination"/>
       <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination"/>
-      <sample.Node>
-        <edges/>
-        <name>Highgarden</name>
-        <x>632</x>
-        <y>1941</y>
-      </sample.Node>
-      <sample.Node>
-        <edges/>
-        <name>Oldtown</name>
-        <x>515</x>
-        <y>2076</y>
-      </sample.Node>
-      <sample.Node>
-        <edges/>
-        <name>King&apos;s Landing</name>
-        <x>979</x>
-        <y>1708</y>
-      </sample.Node>
-      <sample.Node>
-        <edges/>
-        <name>Lannisport</name>
-        <x>517</x>
-        <y>1648</y>
-      </sample.Node>
+      <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination"/>
+      <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination"/>
+      <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination"/>
+      <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination"/>
       <sample.Node>
         <edges/>
         <name>Norvos</name>
@@ -430,19 +557,9 @@
         <x>4451</x>
         <y>3120</y>
       </sample.Node>
-      <sample.Node>
-        <edges/>
-        <name>Guilltown</name>
-        <x>1210</x>
-        <y>1432</y>
-      </sample.Node>
-      <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[4]/destination"/>
-      <sample.Node>
-        <edges/>
-        <name>Storm&apos;s End</name>
-        <x>1126</x>
-        <y>1876</y>
-      </sample.Node>
+      <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[6]/destination/edges/sample.Edge[2]/origin"/>
+      <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[5]/origin"/>
+      <sample.Node reference="../sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[4]/destination"/>
       <sample.Node>
         <edges/>
         <name>Vojjor Samui</name>
@@ -451,13 +568,24 @@
       </sample.Node>
     </nodes>
     <edges>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge"/>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[4]"/>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[5]/origin/edges/sample.Edge"/>
       <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]"/>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]"/>
-      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[5]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]"/>
       <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[4]/destination/edges/sample.Edge"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[4]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[6]/destination/edges/sample.Edge[2]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[6]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge"/>
+      <sample.Edge reference="../../nodes/sample.Node/edges/sample.Edge/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[2]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[3]/destination/edges/sample.Edge[2]"/>
     </edges>
   </sample.Graph>
 </object-stream>
