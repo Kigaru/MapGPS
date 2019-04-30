@@ -1,5 +1,7 @@
 package sample;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +12,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.LinkedList;
 
 
@@ -46,6 +47,8 @@ public class Controller {
         if (imageFile != null) {
             image = new Image(imageFile.toURI().toString());
 
+            graph = loadGraph();
+            /*
             //hardcode nodes for now i guess
 
 
@@ -73,6 +76,7 @@ public class Controller {
             graph.addEdge(new Edge(townF, townG, 7, 8, 23));
             graph.addEdge(new Edge(townG, townH, 14, 88, 9));
 
+            */
 
             for (Node n : graph.getNodes()) {
                 fromChoice.getItems().add(n);
@@ -122,5 +126,37 @@ public class Controller {
 
     public void redrawMap(){
         gfx.redraw();
+    }
+
+    public void addToChoiceBoxes(Node n) {
+        fromChoice.getItems().add(n);
+        toChoice.getItems().add(n);
+    }
+
+    private void saveGraph() {
+        try {
+            XStream xstream = new XStream(new DomDriver());
+            ObjectOutputStream out = null;
+            out = xstream.createObjectOutputStream(new FileWriter("src/sample/graph.xml"));
+            out.writeObject(graph);
+            out.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Graph loadGraph() {
+        try {
+            XStream xstream = new XStream(new DomDriver());
+            ObjectInputStream is = xstream.createObjectInputStream(new FileReader("src/sample/graph.xml"));
+            Graph graph = (Graph) is.readObject();
+            is.close();
+            return graph;
+        }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

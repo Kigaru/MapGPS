@@ -37,7 +37,10 @@ public class NewNodeController {
         int x = Integer.valueOf(newNodeX.getText());
         int y = Integer.valueOf(newNodeY.getText());
 
-        graph.addNode(new sample.Node(name, x, y));
+        sample.Node node = new sample.Node(name, x, y);
+        graph.addNode(node);
+
+        sourceController.addToChoiceBoxes(node);
     }
 
     @FXML
