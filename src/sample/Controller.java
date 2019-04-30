@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -18,6 +19,8 @@ import java.util.LinkedList;
 
 public class Controller {
 
+    @FXML
+    private ScrollPane scrollPane;
     @FXML
     private ChoiceBox<Node> fromChoice, toChoice;
     @FXML
@@ -34,7 +37,7 @@ public class Controller {
 
     @FXML
     private void initialize(){
-        imageFile = new File("WhiteSquare.png");
+        imageFile = new File("src/sample/gotMap.jpg");
 
         loadImage();
     }
@@ -46,6 +49,15 @@ public class Controller {
 
         if (imageFile != null) {
             image = new Image(imageFile.toURI().toString());
+            canvas.setHeight(image.getHeight());
+            canvas.setWidth(image.getWidth());
+
+            scrollPane.setFitToHeight(true);
+            scrollPane.setFitToWidth(true);
+            scrollPane.setHmax(image.getWidth());
+            scrollPane.setVmax(image.getHeight());
+            scrollPane.setPannable(true);
+            System.out.println("scrollPane.isPannable() = " + scrollPane.isPannable());
 
             graph = loadGraph();
 
@@ -171,5 +183,14 @@ public class Controller {
             System.out.println("File may not exist... creating a new graph");
         }
         return new Graph();
+    }
+
+    public void centerOnNode(ActionEvent actionEvent) {
+        int x = ((ChoiceBox<Node>)actionEvent.getSource()).getSelectionModel().getSelectedItem().getX();
+        int y = ((ChoiceBox<Node>)actionEvent.getSource()).getSelectionModel().getSelectedItem().getY();
+        scrollPane.setHvalue(x);
+        scrollPane.setVvalue(y);
+
+
     }
 }

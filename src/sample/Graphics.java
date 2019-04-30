@@ -36,6 +36,7 @@ public class Graphics {
     }
 
     public void redraw(){
+        System.out.println("Redrawing");
         this.background = drawMap(graph.getNodes(), graph.getEdges(), sourceImage);
         restoreImage();
     }
@@ -68,7 +69,7 @@ public class Graphics {
     private Image drawMap(LinkedList<Node> nodes, Set<Edge> edges, Image image) {
         graphicsContext.drawImage(image, 0, 0); //Defaulting to 0 (see no need for anything else rn)
         for (Node n : nodes) {
-            drawNode(n, 5);
+            drawNode(n, 15);
             drawName(n);
         }
         for (Edge e : edges) drawEdge(e);
@@ -77,6 +78,7 @@ public class Graphics {
     }
 
     private void drawNode(Node n, int radius) {
+        graphicsContext.setLineWidth(3);
         graphicsContext.strokeArc(n.getX() - radius, n.getY() - radius, radius * 2, radius * 2,0, 360, ArcType.OPEN);
     }
 
@@ -90,7 +92,6 @@ public class Graphics {
         graphicsContext.setFont(Font.font(16));
         graphicsContext.setFill(Color.BLACK);
         graphicsContext.fillText(node.getName(),node.getX(), node.getY() );
-
     }
 
     private void drawStopName(Node node){
