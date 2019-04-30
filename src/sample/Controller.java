@@ -2,6 +2,7 @@ package sample;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -20,6 +21,7 @@ import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 
@@ -173,8 +175,12 @@ public class Controller {
     }
 
     public void addToChoiceBoxes(Node n) {
-        fromChoice.getItems().add(n);
-        toChoice.getItems().add(n);
+        ObservableList<Node> list = fromChoice.getItems();
+        list.add(n);
+        list.sort(Comparator.comparing(Node::getName));
+
+        fromChoice.setItems(list);
+        toChoice.setItems(list);
     }
 
     @FXML
