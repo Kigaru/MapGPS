@@ -60,6 +60,7 @@ public class Controller {
             System.out.println("scrollPane.isPannable() = " + scrollPane.isPannable());
 
             graph = loadGraph();
+            System.out.println("There are: " + graph.getNodes().size() + " cities in this graph so far...");
 
             for (Node n : graph.getNodes()) {
                 addToChoiceBoxes(n);
