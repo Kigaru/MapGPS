@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.ObservableList;
+
 import java.util.*;
 
 public class Graph {
@@ -23,7 +25,8 @@ public class Graph {
         for(Edge edge : e) edges.add(edge);
     }
 
-    public LinkedList<Edge> dijkstra(Node origin, Node destination, int criteria) {
+
+    public LinkedList<Edge> dijkstra(Node origin, Node destination, int criteria, Node[] avoid, Node[] waypoints) {
         HashMap<Node,Float> destinationCostMap = new HashMap();
         HashMap<Node,Edge> edgeTakenMap = new HashMap<>();
         HashSet<Node> traversed = new HashSet<>();
