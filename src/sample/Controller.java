@@ -1,5 +1,7 @@
 package sample;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
@@ -11,7 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.stage.FileChooser;
 
-import java.io.File;
+import java.io.*;
 import java.util.LinkedList;
 
 
@@ -42,6 +44,11 @@ public class Controller {
             GraphicsContext gc = canvas.getGraphicsContext2D();
             gc.drawImage(image,0,0);
 
+            graph = loadGraph();
+
+
+
+            /*
             //hardcode nodes for now i guess
             graph = new Graph();
 
@@ -75,13 +82,16 @@ public class Controller {
                 toChoice.getItems().add(n);
             }
 
-
+            saveGraph()
+            */
 
             gc.setFill(Color.BLACK);
             for (Node n : graph.getNodes()) drawNode(gc, n, 5);
             for (Edge e : graph.getEdges()) drawEdge(gc, e);
 
             routedImage = canvas.snapshot(null, null);
+
+
         }
     }
 
@@ -123,5 +133,33 @@ public class Controller {
     }
 
 
+    @SuppressWarnings("unchecked")
+    private void saveGraph() {
+        try {
+            XStream xstream = new XStream(new DomDriver());
+            ObjectOutputStream out = null;
+            out = xstream.createObjectOutputStream(new FileWriter("graph.xml"));
+            out.writeObject(graph);
+            out.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private Graph loadGraph() {
+        try {
+            XStream xstream = new XStream(new DomDriver());
+            ObjectInputStream is = xstream.createObjectInputStream(new FileReader("graph.xml"));
+            Graph graph = (Graph) is.readObject();
+            is.close();
+            return graph;
+        }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }
