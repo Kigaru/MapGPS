@@ -145,6 +145,7 @@ public class Controller {
         toChoice.getItems().add(n);
     }
 
+    @FXML
     private void saveGraph() {
         try {
             XStream xstream = new XStream(new DomDriver());
@@ -167,8 +168,8 @@ public class Controller {
             return graph;
         }
         catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("File may not exist... creating a new graph");
         }
-        return null;
+        return new Graph();
     }
 }
