@@ -48,6 +48,10 @@ public class Controller {
             image = new Image(imageFile.toURI().toString());
 
             graph = loadGraph();
+
+            for (Node n : graph.getNodes()) {
+                addToChoiceBoxes(n);
+            }
             /*
             //hardcode nodes for now i guess
 
@@ -75,19 +79,13 @@ public class Controller {
             graph.addEdge(new Edge(townF, townH, 6, 1, 5));
             graph.addEdge(new Edge(townF, townG, 7, 8, 23));
             graph.addEdge(new Edge(townG, townH, 14, 88, 9));
-
             */
-
-            for (Node n : graph.getNodes()) {
-                fromChoice.getItems().add(n);
-                toChoice.getItems().add(n);
-            }
 
             criteriaChoice.getItems().addAll("Length", "Difficulty", "Safety");
             criteriaChoice.getSelectionModel().selectFirst();
 
             //////////////////////////////////////// GFX
-            gfx = new Graphics(canvas, image, graph);
+            redrawMap();
         }
     }
 
@@ -120,12 +118,26 @@ public class Controller {
         newNodeController.setMainStageController(this);
         newNodeController.setMainScene(sourceStage.getScene());
         newNodeController.setGraph(graph);
-        sourceStage.setTitle("Add new Node");
+        sourceStage.setTitle("Add new ...");
+        sourceStage.setScene(new Scene(root, 600, 300));
+    }
+
+    @FXML
+    private void newEdge(ActionEvent actionEvent) throws IOException {
+        Stage sourceStage = (Stage)Stage.getWindows().filtered(window -> window.isShowing()).get(0);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("newEdgeWindow.fxml"));
+        Parent root = loader.load();
+        NewEdgeController newEdgeController = loader.getController();
+        newEdgeController.setMainStageController(this);
+        newEdgeController.setMainScene(sourceStage.getScene());
+        newEdgeController.setGraph(graph);
+        sourceStage.setTitle("Add new ...");
         sourceStage.setScene(new Scene(root, 600, 300));
     }
 
     public void redrawMap(){
-        gfx.redraw();
+        if(gfx == null) gfx = new Graphics(canvas, image, graph);
+        else gfx.redraw();
     }
 
     public void addToChoiceBoxes(Node n) {

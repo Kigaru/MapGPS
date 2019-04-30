@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 import java.util.LinkedList;
@@ -17,6 +18,7 @@ import java.util.Set;
 public class Graphics {
     private Canvas canvas;
     private GraphicsContext graphicsContext;
+    private Image sourceImage;
     private Image background;
     private Graph graph;
 
@@ -24,7 +26,8 @@ public class Graphics {
         this.canvas = canvas;
         this.graphicsContext = canvas.getGraphicsContext2D();
         this.graph = graph;
-        this.background = drawMap(graph.getNodes(), graph.getEdges(), image);
+        this.sourceImage = image;
+        this.background = drawMap(graph.getNodes(), graph.getEdges(), sourceImage);
         graphicsContext.drawImage(background, 0, 0);
     }
 
@@ -33,7 +36,7 @@ public class Graphics {
     }
 
     public void redraw(){
-        this.background = drawMap(graph.getNodes(), graph.getEdges(), background);
+        this.background = drawMap(graph.getNodes(), graph.getEdges(), sourceImage);
         restoreImage();
     }
 
@@ -43,27 +46,16 @@ public class Graphics {
 
         graphicsContext.setStroke(Color.RED);
         graphicsContext.setLineWidth(orgStrokeWidth*3);
-        graphicsContext.setTextAlign(TextAlignment.CENTER.CENTER);
-        graphicsContext.setTextBaseline(VPos.BOTTOM);
-        graphicsContext.setFont(Font.font(16));
-
+        graphicsContext.setFont(Font.font(18));
 
         graphicsContext.drawImage(background, 0, 0);
         graphicsContext.beginPath();
         graphicsContext.moveTo(origin.getX(),origin.getY());
-        graphicsContext.fillText(
-                origin.getName(),
-                origin.getX(),
-                origin.getY()
-        );
 
+        drawStopName(origin);
         for(Edge e: path) {
             origin = e.getTheOtherNode(origin);
-            graphicsContext.fillText(
-                    origin.getName(),
-                    origin.getX(),
-                    origin.getY()
-            );
+            drawStopName(origin);
             graphicsContext.lineTo(origin.getX(),origin.getY());
         }
         graphicsContext.stroke();
@@ -75,7 +67,10 @@ public class Graphics {
 
     private Image drawMap(LinkedList<Node> nodes, Set<Edge> edges, Image image) {
         graphicsContext.drawImage(image, 0, 0); //Defaulting to 0 (see no need for anything else rn)
-        for (Node n : nodes) drawNode(n, 5);
+        for (Node n : nodes) {
+            drawNode(n, 5);
+            drawName(n);
+        }
         for (Edge e : edges) drawEdge(e);
 
         return canvas.snapshot(null, null);
@@ -90,7 +85,20 @@ public class Graphics {
     }
 
     private void drawName(Node node){
+        graphicsContext.setTextAlign(TextAlignment.CENTER.CENTER);
+        graphicsContext.setTextBaseline(VPos.BOTTOM);
+        graphicsContext.setFont(Font.font(16));
+        graphicsContext.setFill(Color.BLACK);
+        graphicsContext.fillText(node.getName(),node.getX(), node.getY() );
 
+    }
+
+    private void drawStopName(Node node){
+        graphicsContext.setTextAlign(TextAlignment.CENTER.CENTER);
+        graphicsContext.setTextBaseline(VPos.BOTTOM);
+        graphicsContext.setFont(Font.font(20));
+        graphicsContext.setFill(Color.RED);
+        graphicsContext.fillText(node.getName(),node.getX(), node.getY() );
     }
 
     public void clearPath() {

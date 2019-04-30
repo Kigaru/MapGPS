@@ -24,6 +24,7 @@
           <Menu mnemonicParsing="false" text="Edit">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#newNode" text="Add New Node" />
+                  <MenuItem mnemonicParsing="false" onAction="#newEdge" text="Add New Edge" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

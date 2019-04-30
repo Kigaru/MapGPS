@@ -39,8 +39,17 @@ public class NewNodeController {
 
         sample.Node node = new sample.Node(name, x, y);
         graph.addNode(node);
-
         sourceController.addToChoiceBoxes(node);
+
+        clearInput();
+    }
+
+    private void clearInput() {
+        newNodeName.clear();
+        newNodeX.clear();
+        newNodeY.clear();
+
+        newNodeName.requestFocus();
     }
 
     @FXML
