@@ -23,7 +23,7 @@ public class Graph {
         for(Edge edge : e) edges.add(edge);
     }
 
-    public LinkedList<Edge> dijkstra(Node origin, Node destination) {
+    public LinkedList<Edge> dijkstra(Node origin, Node destination, int criteria) {
         HashMap<Node,Float> destinationCostMap = new HashMap();
         HashMap<Node,Edge> edgeTakenMap = new HashMap<>();
         HashSet<Node> traversed = new HashSet<>();
@@ -50,7 +50,7 @@ public class Graph {
             for(Edge e: currentNode.getEdges()) {
                 Node dest = e.getTheOtherNode(currentNode);//this is the node that is connected to the current node with the edge e
                 if(!traversed.contains(dest)){
-                    float currentCost = destinationCostMap.get(currentNode) + e.getWeight();
+                    float currentCost = destinationCostMap.get(currentNode) + e.getWeight()[criteria];
                     //step 2: iterate through each edge that is not settled on that iterated node, add these nodes to unsettled.
                     toBeTraversed.add(dest);
                     //if the current route cost is cheaper than the one already in the table

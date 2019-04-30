@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
-import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -15,6 +14,8 @@ public class Controller {
 
     @FXML
     private ChoiceBox<Node> fromChoice, toChoice;
+    @FXML
+    private ChoiceBox<String> criteriaChoice;
     @FXML
     private Canvas canvas;
 
@@ -59,23 +60,26 @@ public class Controller {
             graph.addNode(townA, townB, townC, townD, townE, townF, townG);
             graph.addNode(townH);
 
-            graph.addEdge(new Edge(townA, townB, 5));
-            graph.addEdge(new Edge(townB, townC, 3));
-            graph.addEdge(new Edge(townA, townC, 7));
-            graph.addEdge(new Edge(townD, townC, 4));
-            graph.addEdge(new Edge(townC, townE, 2));
-            graph.addEdge(new Edge(townC, townF, 5));
-            graph.addEdge(new Edge(townD, townF, 4));
-            graph.addEdge(new Edge(townE, townF, 9));
-            graph.addEdge(new Edge(townF, townH, 6));
-            graph.addEdge(new Edge(townF, townG, 7));
-            graph.addEdge(new Edge(townG, townH, 14));
+            graph.addEdge(new Edge(townA, townB, 5, 3, 11));
+            graph.addEdge(new Edge(townB, townC, 3, 5, 23));
+            graph.addEdge(new Edge(townA, townC, 7, 7, 1));
+            graph.addEdge(new Edge(townD, townC, 4, 12, 3));
+            graph.addEdge(new Edge(townC, townE, 2, 1, 2));
+            graph.addEdge(new Edge(townC, townF, 5, 84, 55));
+            graph.addEdge(new Edge(townD, townF, 4, 13,4));
+            graph.addEdge(new Edge(townE, townF, 9, 123, 87));
+            graph.addEdge(new Edge(townF, townH, 6, 1, 5));
+            graph.addEdge(new Edge(townF, townG, 7, 8, 23));
+            graph.addEdge(new Edge(townG, townH, 14, 88, 9));
 
 
             for (Node n : graph.getNodes()) {
                 fromChoice.getItems().add(n);
                 toChoice.getItems().add(n);
             }
+
+            criteriaChoice.getItems().addAll("Length", "Difficulty", "Safety");
+            criteriaChoice.getSelectionModel().selectFirst();
 
             //////////////////////////////////////// GFX
             gfx = new Graphics(canvas, image, graph);
@@ -93,7 +97,7 @@ public class Controller {
     private void calculatePath() {
         if(fromChoice.getValue() != null && toChoice.getValue() != null) {
 //            gfx.restoreImage();
-            LinkedList<Edge> path = graph.dijkstra(fromChoice.getValue(), toChoice.getValue());
+            LinkedList<Edge> path = graph.dijkstra(fromChoice.getValue(), toChoice.getValue(), criteriaChoice.getSelectionModel().getSelectedIndex());
 
             gfx.drawPath(path, fromChoice.getValue());
         }
@@ -101,6 +105,11 @@ public class Controller {
 
     @FXML
     private void test(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+    private void clearPath(ActionEvent actionEvent) {
         gfx.restoreImage();
     }
 }

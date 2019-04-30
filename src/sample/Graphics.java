@@ -85,4 +85,7 @@ public class Graphics {
     private void drawName(Node node){
 
     }
+
+    public void clearPath() {
+    }
 }

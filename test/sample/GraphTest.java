@@ -29,12 +29,12 @@ class GraphTest {
         e = new Node("e", 4, 4);
         graph.addNode(a, b, c, d, e);
 
-        ab1 = new Edge(a, b, 1);
-        ac2 = new Edge(a, c, 2);
-        bc3 = new Edge(b, c, 3);
-        ec4 = new Edge(e, c, 4);
-        bd5 = new Edge(b, d, 5);
-        de6 = new Edge(d, e, 6);
+        ab1 = new Edge(a, b, 1, 2, 3);
+        ac2 = new Edge(a, c, 2, 3, 1);
+        bc3 = new Edge(b, c, 3, 4, 2);
+        ec4 = new Edge(e, c, 4, 3, 3);
+        bd5 = new Edge(b, d, 5, 12, 2);
+        de6 = new Edge(d, e, 6, 2,1);
     }
 
     @BeforeEach
@@ -61,36 +61,36 @@ class GraphTest {
         t = new Node("t", 19,19);
         complexGraph.addNode(u,v,w,x,y,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t);
 
-        uv20 = new Edge(u, v, 20);
-        uw4 = new Edge(u, w, 4);
-        ux5 = new Edge(u, x, 5);
-        uf3 = new Edge(u, f, 3);
-        vy5 = new Edge(v, y, 5);
-        wx4 = new Edge(w, x, 4);
-        xy42 = new Edge(x, y, 42);
-        fg3 = new Edge(f, g, 3);
-        gh5 = new Edge(g, h, 5);
-        gj55 = new Edge(g, j, 55);
-        hi5 = new Edge(h, i, 5);
-        hk11 = new Edge(h,k , 11);
-        hl13 = new Edge(h, l, 13);
-        ji1 = new Edge(j, i, 1);
-        jk11 = new Edge(j,k , 11);
-        ik4 = new Edge(i, k, 4);
-        kl8 = new Edge(k, l, 8);
-        km2 = new Edge(k, m, 2);
-        kn4 = new Edge(k, n, 4);
-        ko5 = new Edge(k, o,5);
-        kp11 = new Edge(k, p,11);
-        lm7 = new Edge(l, m,7);
-        lt14 = new Edge(l, t, 14);
-        mn9 = new Edge(m, n, 9);
-        nq5 = new Edge(n, q, 5);
-        po6 = new Edge(p, o, 6);
-        oq13 = new Edge(o,q , 13);
-        qr6 = new Edge(q, r, 6);
-        rs5 = new Edge(r, s,5 );
-        st3 = new Edge(s,t , 3);
+        uv20 = new Edge(u, v, 20, 4, 55);
+        uw4 = new Edge(u, w, 4, 5,11);
+        ux5 = new Edge(u, x, 5, 11, 4);
+        uf3 = new Edge(u, f, 3, 1,2);
+        vy5 = new Edge(v, y, 5, 7, 88);
+        wx4 = new Edge(w, x, 4, 23, 12);
+        xy42 = new Edge(x, y, 42, 58, 32);
+        fg3 = new Edge(f, g, 3, 1, 1);
+        gh5 = new Edge(g, h, 5,8, 13);
+        gj55 = new Edge(g, j, 55, 98, 7);
+        hi5 = new Edge(h, i, 5,12,34);
+        hk11 = new Edge(h,k , 11,12,35);
+        hl13 = new Edge(h, l, 13,11,2);
+        ji1 = new Edge(j, i, 1,8,7);
+        jk11 = new Edge(j,k , 11,8, 65);
+        ik4 = new Edge(i, k, 4,76,3);
+        kl8 = new Edge(k, l, 8,7, 12);
+        km2 = new Edge(k, m, 2,11,56);
+        kn4 = new Edge(k, n, 4,76,43);
+        ko5 = new Edge(k, o,5,23,1);
+        kp11 = new Edge(k, p,11,2,17);
+        lm7 = new Edge(l, m,7,2,65);
+        lt14 = new Edge(l, t, 14, 87,7);
+        mn9 = new Edge(m, n, 9, 87,23);
+        nq5 = new Edge(n, q, 5,12,54);
+        po6 = new Edge(p, o, 6,23,1);
+        oq13 = new Edge(o,q , 13, 9,12);
+        qr6 = new Edge(q, r, 6,1,3);
+        rs5 = new Edge(r, s,5,9,3 );
+        st3 = new Edge(s,t , 3,12,11);
     }
 
     @Test
@@ -98,7 +98,7 @@ class GraphTest {
      one = new Node("single city", 0,0);
      Graph singleGraph = new Graph();
      singleGraph.addNode(one);
-     assertTrue(singleGraph.dijkstra(one,one).isEmpty());
+     assertTrue(singleGraph.dijkstra(one,one, 0).isEmpty());
     }
 
     @Test
@@ -107,7 +107,7 @@ class GraphTest {
         route.add(ac2);
         route.add(ec4);
 
-        assertTrue(graph.dijkstra(a, e).equals(route));
+        assertTrue(graph.dijkstra(a, e, 0).equals(route));
     }
 
     @Test
@@ -125,6 +125,6 @@ class GraphTest {
         route.add(uv20);
         route.add(vy5);
 
-        assertTrue(complexGraph.dijkstra(s,y).equals(route));
+        assertTrue(complexGraph.dijkstra(s,y, 0).equals(route));
     }
 }
