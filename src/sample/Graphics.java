@@ -18,16 +18,23 @@ public class Graphics {
     private Canvas canvas;
     private GraphicsContext graphicsContext;
     private Image background;
+    private Graph graph;
 
     public Graphics(Canvas canvas, Image image, Graph graph){ //add map image to constructor?
         this.canvas = canvas;
         this.graphicsContext = canvas.getGraphicsContext2D();
+        this.graph = graph;
         this.background = drawMap(graph.getNodes(), graph.getEdges(), image);
         graphicsContext.drawImage(background, 0, 0);
     }
 
     public void restoreImage(){
         graphicsContext.drawImage(background, 0,0);
+    }
+
+    public void redraw(){
+        this.background = drawMap(graph.getNodes(), graph.getEdges(), background);
+        restoreImage();
     }
 
     public void drawPath(LinkedList<Edge> path, Node origin){

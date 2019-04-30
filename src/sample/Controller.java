@@ -2,11 +2,16 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
 
@@ -37,10 +42,6 @@ public class Controller {
     @FXML
     private void loadImage() {
         graph = new Graph();
-
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Choose an image...");
-//        imageFile = fileChooser.showOpenDialog(canvas.getScene().getWindow());
 
         if (imageFile != null) {
             image = new Image(imageFile.toURI().toString());
@@ -83,13 +84,6 @@ public class Controller {
 
             //////////////////////////////////////// GFX
             gfx = new Graphics(canvas, image, graph);
-
-//            gfx.drawMap(graph.getNodes(), graph.getEdges());
-
-//
-//            SnapshotParameters params = new SnapshotParameters();
-//            params.setFill(Color.TRANSPARENT);
-//            routedImage = canvas.snapshot(params, null);
         }
     }
 
@@ -111,5 +105,22 @@ public class Controller {
     @FXML
     private void clearPath(ActionEvent actionEvent) {
         gfx.restoreImage();
+    }
+
+    @FXML
+    private void newNode(ActionEvent actionEvent) throws IOException {
+        Stage sourceStage = (Stage)Stage.getWindows().filtered(window -> window.isShowing()).get(0);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("newNodeWindow.fxml"));
+        Parent root = loader.load();
+        NewNodeController newNodeController = loader.getController();
+        newNodeController.setMainStageController(this);
+        newNodeController.setMainScene(sourceStage.getScene());
+        newNodeController.setGraph(graph);
+        sourceStage.setTitle("Add new Node");
+        sourceStage.setScene(new Scene(root, 600, 300));
+    }
+
+    public void redrawMap(){
+        gfx.redraw();
     }
 }
