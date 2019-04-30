@@ -87,29 +87,33 @@ public class Controller {
         zoomGroup.getChildren().add(canvas);
         scrollPane.setContent(zoomGroup);
 
+        //Zooming
         canvas.addEventFilter(ScrollEvent.ANY, e->{
+            boolean atLimit = false;
+            double delta = 1.1;
+            double factor = canvas.getScaleX();
 
-                double delta = 1.1;
-                double factor = canvas.getScaleX();
+            if (e.getDeltaY() < 0) {
+                factor /= delta;
+            } else {
+                factor *= delta;
+            }
 
-                if (e.getDeltaY() < 0) {
-                    factor /= delta;
-                } else {
-                    factor *= delta;
-                }
+            if (factor < .2 || factor > 5) {
+                atLimit = true;
+                factor = factor < .2 ? .2 : 5;
+            }
 
-                if (factor < .2 || factor > 5) {
-                    factor = factor < .2 ? .2 : 5;
-                }
+            canvas.setScaleX(factor);
+            canvas.setScaleY(factor);
 
-                canvas.setScaleX(factor);
-                canvas.setScaleY(factor);
-
+            if(!atLimit){
                 scrollPane.setHvalue(e.getX()/image.getWidth());
                 scrollPane.setVvalue(e.getY()/image.getHeight());
+            }
 
-                e.consume();
-            });
+            e.consume();
+        });
 
         canvas.setOnMouseClicked(e -> {
             System.out.println("["+e.getX()+", "+e.getY()+"]"); //Can be used to get places on click maybe
@@ -204,7 +208,6 @@ public class Controller {
     public void centerOnNode(ActionEvent actionEvent) {
         int x = ((ChoiceBox<Node>)actionEvent.getSource()).getSelectionModel().getSelectedItem().getX();
         int y = ((ChoiceBox<Node>)actionEvent.getSource()).getSelectionModel().getSelectedItem().getY();
-        System.out.println("x: " + x + ", y: " + y);
         scrollPane.setHvalue(x/image.getWidth());
         scrollPane.setVvalue(y/image.getHeight());
     }
