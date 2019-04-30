@@ -246,4 +246,9 @@ public class Controller {
         Node n = extraChoiceBox.getSelectionModel().getSelectedItem();
         waypointListView.getItems().add(n);
     }
+
+    @FXML
+    private void test() {
+
+    }
 }

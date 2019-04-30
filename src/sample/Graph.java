@@ -59,17 +59,19 @@ public class Graph {
             }
             for(Edge e: currentNode.getEdges()) {
                 Node dest = e.getTheOtherNode(currentNode);//this is the node that is connected to the current node with the edge e
-                if(!traversed.contains(dest)){
-                    float currentCost = destinationCostMap.get(currentNode) + e.getWeight()[criteria];
-                    //step 2: iterate through each edge that is not settled on that iterated node, add these nodes to unsettled.
-                    toBeTraversed.add(dest);
-                    //if the current route cost is cheaper than the one already in the table
-                    //do steps 3 & 4
-                    if(currentCost < destinationCostMap.get(dest)) {
-                        //step 3: add total destination cost to each of these neighbors
-                        destinationCostMap.replace(dest,currentCost);
-                        //step 4: add the iterated node to each neighbor's edge taken table.
-                        edgeTakenMap.replace(dest,e);
+                if (!traversed.contains(dest)) {
+                    if(!avoidList.contains(dest)) {
+                        float currentCost = destinationCostMap.get(currentNode) + e.getWeight()[criteria];
+                        //step 2: iterate through each edge that is not settled on that iterated node, add these nodes to unsettled.
+                        toBeTraversed.add(dest);
+                        //if the current route cost is cheaper than the one already in the table
+                        //do steps 3 & 4
+                        if (currentCost < destinationCostMap.get(dest)) {
+                            //step 3: add total destination cost to each of these neighbors
+                            destinationCostMap.replace(dest, currentCost);
+                            //step 4: add the iterated node to each neighbor's edge taken table.
+                            edgeTakenMap.replace(dest, e);
+                        }
                     }
                 }
             }
