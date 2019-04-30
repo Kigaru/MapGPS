@@ -3,6 +3,7 @@ package sample;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,13 +87,12 @@ public class Controller {
         zoomGroup.getChildren().add(canvas);
         scrollPane.setContent(zoomGroup);
 
-        scrollPane.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
-            @Override
-            public void handle(ScrollEvent event) {
+        canvas.addEventFilter(ScrollEvent.ANY, e->{
+
                 double delta = 1.1;
                 double factor = canvas.getScaleX();
 
-                if (event.getDeltaY() < 0) {
+                if (e.getDeltaY() < 0) {
                     factor /= delta;
                 } else {
                     factor *= delta;
@@ -104,12 +104,17 @@ public class Controller {
 
                 canvas.setScaleX(factor);
                 canvas.setScaleY(factor);
-                
-                scrollPane.setHvalue(event.getSceneX()/scrollPane.getWidth());
-                scrollPane.setVvalue(event.getSceneY()/scrollPane.getHeight());
 
-                event.consume();
-            }});
+                scrollPane.setHvalue(e.getX()/image.getWidth());
+                scrollPane.setVvalue(e.getY()/image.getHeight());
+
+                e.consume();
+            });
+
+        canvas.setOnMouseClicked(e -> {
+            System.out.println("["+e.getX()+", "+e.getY()+"]"); //Can be used to get places on click maybe
+        });
+
     }
 
     @FXML
