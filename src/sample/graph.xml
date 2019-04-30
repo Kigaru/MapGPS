@@ -13,23 +13,365 @@
         <x>823</x>
         <y>1095</y>
       </sample.Node>
-	  <sample.Node>
+      <sample.Node>
         <edges/>
         <name>Vaes Khadokh</name>
         <x>2184</x>
         <y>1683</y>
       </sample.Node>
-	  <sample.Node>
+      <sample.Node>
         <edges/>
         <name>Qohor</name>
         <x>1969</x>
         <y>1693</y>
       </sample.Node>
-	  <sample.Node>
+      <sample.Node>
         <edges/>
         <name>Saath</name>
         <x>2240</x>
         <y>1373</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Sar Mell</name>
+        <x>1861</x>
+        <y>2164</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Volantis</name>
+        <x>1913</x>
+        <y>2209</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Mantarys</name>
+        <x>2249</x>
+        <y>2165</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Oros</name>
+        <x>2223</x>
+        <y>2453</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Tyria</name>
+        <x>2199</x>
+        <y>2513</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Valyria</name>
+        <x>2162</x>
+        <y>2599</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Tolos</name>
+        <x>2359</x>
+        <y>2227</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Bhorash</name>
+        <x>2488</x>
+        <y>2095</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Meereen</name>
+        <x>2712</x>
+        <y>2081</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Yunkai</name>
+        <x>2642</x>
+        <y>2145</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Astapor</name>
+        <x>2605</x>
+        <y>2311</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Old Ghis</name>
+        <x>2644</x>
+        <y>2499</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Hesh</name>
+        <x>2885</x>
+        <y>2089</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Lhazosh</name>
+        <x>2957</x>
+        <y>2190</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Kosrak</name>
+        <x>3065</x>
+        <y>2090</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Vaes Orvik</name>
+        <x>3085</x>
+        <y>2418</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Port Yhos</name>
+        <x>3066</x>
+        <y>2475</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Vaes Shirosi</name>
+        <x>3170</x>
+        <y>2393</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Qarkash</name>
+        <x>3257</x>
+        <y>2447</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Vaes Qosar</name>
+        <x>3356</x>
+        <y>2411</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Valysar</name>
+        <x>1815</x>
+        <y>2128</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Selhorys</name>
+        <x>1827</x>
+        <y>2070</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>The Sorrows</name>
+        <x>1796</x>
+        <y>1939</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Myr</name>
+        <x>1554</x>
+        <y>1959</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Ar Noy</name>
+        <x>1872</x>
+        <y>1774</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>The Twins</name>
+        <x>782</x>
+        <y>1321</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Harrenhal</name>
+        <x>910</x>
+        <y>1538</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>The Eyrie</name>
+        <x>1038</x>
+        <y>1391</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Riverrun</name>
+        <x>750</x>
+        <y>1488</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Highgarden</name>
+        <x>632</x>
+        <y>1941</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Oldtown</name>
+        <x>515</x>
+        <y>2076</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>King&apos;s Landing</name>
+        <x>979</x>
+        <y>1708</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Lannisport</name>
+        <x>517</x>
+        <y>1648</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Norvos</name>
+        <x>1722</x>
+        <y>1542</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Ghoyan Drohe</name>
+        <x>1599</x>
+        <y>1662</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Pentos</name>
+        <x>1461</x>
+        <y>1691</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Vaes Khewo</name>
+        <x>2461</x>
+        <y>1731</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Vaes Diaf</name>
+        <x>2693</x>
+        <y>1880</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Yalli Qamayi</name>
+        <x>2742</x>
+        <y>1734</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Vaes Efe</name>
+        <x>3129</x>
+        <y>1873</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Vaes Dothrak</name>
+        <x>3197</x>
+        <y>1574</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Kayakayanaya</name>
+        <x>3650</x>
+        <y>1678</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Samyriana</name>
+        <x>3587</x>
+        <y>1977</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Bayasabhad</name>
+        <x>3675</x>
+        <y>2221</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Tiqui</name>
+        <x>3917</x>
+        <y>2175</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Trade Town</name>
+        <x>3964</x>
+        <y>2004</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Nefer</name>
+        <x>4378</x>
+        <y>1666</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>K&apos;Dath</name>
+        <x>4641</x>
+        <y>1938</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Bonetown</name>
+        <x>4753</x>
+        <y>2030</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>The Five Forts</name>
+        <x>4536</x>
+        <y>2113</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Jinqi</name>
+        <x>4311</x>
+        <y>2581</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Stygai</name>
+        <x>4557</x>
+        <y>3005</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Asshai</name>
+        <x>4451</x>
+        <y>3120</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Guilltown</name>
+        <x>1210</x>
+        <y>1432</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Dragonstone</name>
+        <x>1094</x>
+        <y>1588</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Storm&apos;s End</name>
+        <x>1126</x>
+        <y>1876</y>
+      </sample.Node>
+      <sample.Node>
+        <edges/>
+        <name>Vojjor Samui</name>
+        <x>2618</x>
+        <y>1694</y>
       </sample.Node>
     </nodes>
     <edges/>
