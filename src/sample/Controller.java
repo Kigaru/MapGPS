@@ -204,8 +204,9 @@ public class Controller {
     public void centerOnNode(ActionEvent actionEvent) {
         int x = ((ChoiceBox<Node>)actionEvent.getSource()).getSelectionModel().getSelectedItem().getX();
         int y = ((ChoiceBox<Node>)actionEvent.getSource()).getSelectionModel().getSelectedItem().getY();
-        scrollPane.setHvalue(x);
-        scrollPane.setVvalue(y);
+        System.out.println("x: " + x + ", y: " + y);
+        scrollPane.setHvalue(x/image.getWidth());
+        scrollPane.setVvalue(y/image.getHeight());
     }
 
 }
