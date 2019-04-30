@@ -71,12 +71,14 @@ public class Graph {
         //step 7: create a list of edges to get the order of edges to travel through.
         LinkedList<Edge> dijkstraPath = new LinkedList<>();
         //create a current destination node
-        Node dest = destination;
-        while(!dest.equals(origin)) {
-            //step 8: add the edge that's taken from the current destination node to the route list.
+        if(traversed.contains(destination)) {
+            Node dest = destination;
+            while (!dest.equals(origin)) {
+                //step 8: add the edge that's taken from the current destination node to the route list.
 
-            dijkstraPath.add(edgeTakenMap.get(dest));
-            dest = dijkstraPath.getLast().getTheOtherNode(dest);
+                dijkstraPath.add(edgeTakenMap.get(dest));
+                dest = dijkstraPath.getLast().getTheOtherNode(dest);
+            }
         }
         //step 9: step 8 until reached the origin
         //step 10: return the list.
