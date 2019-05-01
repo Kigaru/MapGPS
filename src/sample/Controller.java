@@ -19,7 +19,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -42,6 +41,9 @@ public class Controller {
     private ChoiceBox<String> criteriaChoice;
     @FXML
     private Canvas canvas;
+
+    private final double MIN_SCALE_FACTOR = .2;
+    private final double MAX_SCALE_FACTOR = 1.5;
 
     private Graphics gfx;
     private File imageFile;
@@ -116,9 +118,9 @@ public class Controller {
                 factor *= delta;
             }
 
-            if (factor < .2 || factor > 5) {
+            if (factor < MIN_SCALE_FACTOR || factor > MAX_SCALE_FACTOR) {
                 atLimit = true;
-                factor = factor < .2 ? .2 : 5;
+                factor = factor < MIN_SCALE_FACTOR ? MIN_SCALE_FACTOR : MAX_SCALE_FACTOR;
             }
 
             canvas.setScaleX(factor);
@@ -132,9 +134,9 @@ public class Controller {
             e.consume();
         });
 
-        canvas.setOnMouseClicked(e -> {
-            System.out.println("["+e.getX()+", "+e.getY()+"]"); //Can be used to get places on click maybe
-        });
+//        canvas.setOnMouseClicked(e -> {
+//            System.out.println("["+e.getX()+", "+e.getY()+"]"); //Can be used to get places on click maybe
+//        });
 
     }
 
@@ -205,7 +207,7 @@ public class Controller {
     private void clearPath(ActionEvent actionEvent) {
         waypointListView.getItems().clear();
         avoidListView.getItems().clear();
-        gfx.restoreImage();
+        gfx.resetImage();
     }
 
     @FXML

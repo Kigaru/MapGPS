@@ -1,6 +1,8 @@
 package sample;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.VPos;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -9,9 +11,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -27,16 +31,36 @@ public class Graphics {
         this.graphicsContext = canvas.getGraphicsContext2D();
         this.graph = graph;
         this.sourceImage = image;
-        this.background = drawMap(graph.getNodes(), graph.getEdges(), sourceImage, showAllRoutes);
-        graphicsContext.drawImage(background, 0, 0);
+        this.background = drawBackgroundMap(graph, sourceImage, showAllRoutes);
     }
 
-    public void restoreImage(){
+    public void take(final Canvas canvas) { //take a screenshot of the canvas and save it to a file -- test purposes
+        final WritableImage writableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
+        final WritableImage snapshot = canvas.snapshot(new SnapshotParameters(), writableImage);
+
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", new File("F:/test.png"));
+        } catch (final IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void resetImage(){ //call this when resetting routes
+        graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight()); //clear canvas before drawing background again.
         graphicsContext.drawImage(background, 0,0);
     }
 
-    public void redraw(boolean showAllRoutes){
-        this.background = drawMap(graph.getNodes(), graph.getEdges(), sourceImage, showAllRoutes);
+    public void redraw(boolean showAllRoutes){ //in case new nodes/edges were added
+        long time = System.nanoTime();
+        
+        double scale = canvas.getScaleX();
+        canvas.setScaleX(1);
+        canvas.setScaleY(1);
+        this.background = drawBackgroundMap(graph, sourceImage, showAllRoutes);
+        canvas.setScaleX(scale);
+        canvas.setScaleY(scale);
+
+        System.out.println("(System.nanoTime() - time) = " + (System.nanoTime() - time));
     }
 
     public void drawPath(LinkedList<Edge> path, Node origin){
@@ -47,7 +71,7 @@ public class Graphics {
         graphicsContext.setLineWidth(orgStrokeWidth*3);
         graphicsContext.setFont(Font.font(18));
 
-        graphicsContext.drawImage(background, 0, 0);
+        resetImage();
         graphicsContext.beginPath();
         graphicsContext.moveTo(origin.getX(),origin.getY());
 
@@ -64,15 +88,16 @@ public class Graphics {
         graphicsContext.setStroke(orgPaint);
     }
 
-    private Image drawMap(LinkedList<Node> nodes, Set<Edge> edges, Image image, boolean showAllRoutes) {
+    private Image drawBackgroundMap(Graph graph, Image image, boolean showAllRoutes) {
         graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight()); //clear canvas before drawing background again.
         graphicsContext.drawImage(image, 0, 0); //Defaulting to 0 (see no need for anything else rn)
-        for (Node n : nodes) {
+        for (Node n : graph.getNodes()) {
             drawNode(n, 10);
 //            drawName(n);
         }
+
         if (showAllRoutes)
-            for (Edge e : edges) drawEdge(e);
+            for (Edge e : graph.getEdges()) drawEdge(e);
 
         return canvas.snapshot(null, null);
     }
